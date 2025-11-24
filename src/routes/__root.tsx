@@ -16,19 +16,11 @@ export const Route = createRootRoute({
   component: () => {
     return (
       <RootDocument>
-        <Providers>
-          <Outlet />
-        </Providers>
+        <Outlet />
       </RootDocument>
     );
   },
 });
-
-const Providers = ({ children }: ParentProps) => (
-  <>
-    {children}
-  </>
-);
 
 const RootDocument = ({ children }: ParentProps) => (
   <html>
