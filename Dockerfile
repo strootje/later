@@ -9,7 +9,7 @@ RUN deno i --allow-scripts=npm:@sentry/cli
 
 COPY *.config.ts .
 COPY src/ ./src/
-COPY pkgs/ ./pkgs/
+# COPY pkgs/ ./pkgs/
 RUN deno task build
 
 FROM docker.io/denoland/deno:alpine-${DENO_VERSION}
