@@ -5,6 +5,8 @@ import uno from "unocss/vite";
 import { defineConfig } from "vite";
 import solid from "vite-plugin-solid";
 
+import { nitroV2Plugin } from "@tanstack/nitro-v2-vite-plugin";
+
 export default defineConfig({
   build: { sourcemap: true },
   server: { port: 3000 },
@@ -18,6 +20,7 @@ export default defineConfig({
         quoteStyle: "double",
       },
     }),
+    nitroV2Plugin({ preset: "deno-server" }),
     solid({ ssr: true }),
     uno(),
     sentryVitePlugin({
