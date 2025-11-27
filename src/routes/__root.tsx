@@ -1,3 +1,5 @@
+import { MigrateToLatest } from "@scope/database/client";
+import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/solid-router";
 import type { ParentProps } from "solid-js";
 import { HydrationScript } from "solid-js/web";
@@ -13,23 +15,24 @@ export const Route = createRootRoute({
     ],
   }),
 
-  component: () => {
-    return (
-      <RootDocument>
+  component: () => (
+    <RootDocument>
+      <QueryClientProvider client={new QueryClient()}>
         <Outlet />
-      </RootDocument>
-    );
-  },
+      </QueryClientProvider>
+    </RootDocument>
+  ),
 });
 
 const RootDocument = ({ children }: ParentProps) => (
   <html>
     <head>
+      <HeadContent />
       <HydrationScript />
     </head>
 
     <body>
-      <HeadContent />
+      <MigrateToLatest />
       {children}
       <Scripts />
     </body>

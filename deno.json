@@ -5,9 +5,11 @@
   },
 
   "nodeModulesDir": "auto",
+  "workspace": ["pkgs/**"],
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "solid-js",
+    "module": "preserve",
     "lib": ["deno.ns", "dom"]
   },
 

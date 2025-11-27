@@ -1,0 +1,6 @@
+{
+  "name": "@scope/database",
+  "exports": {
+    "./client": "./client/mod.ts"
+  }
+}
