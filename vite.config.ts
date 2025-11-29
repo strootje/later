@@ -25,7 +25,7 @@ export default defineConfig({
     sqlocal(),
     uno(),
     sentryVitePlugin({
-      authToken: "5089b097a5de1ef1fe003ce0f26623e134a51d82",
+      authToken: Deno.env.get("SENTRY_TOKEN"),
       url: "https://bugs.strooware.nl",
       org: "does-not-matter",
       project: "later",
