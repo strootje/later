@@ -1,16 +1,17 @@
 
 
 ARG DENO_VERSION=2.5.6
-FROM docker.io/denoland/deno:alpine-${DENO_VERSION} AS build
+FROM docker.io/denoland/deno:alpine-${DENO_VERSION} AS deps
 
 WORKDIR /build
 COPY deno.* package.* .
 RUN deno i --allow-scripts=npm:@sentry/cli
-RUN --mount=type=secret,id=sentry_token,env=SENTRY_TOKEN
 
+FROM deps AS build
 COPY *.config.ts .
 COPY src/ ./src/
 COPY pkgs/ ./pkgs/
+RUN --mount=type=secret,id=sentry_token,env=SENTRY_TOKEN
 RUN deno task build
 
 FROM docker.io/denoland/deno:alpine-${DENO_VERSION}
