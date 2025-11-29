@@ -23,7 +23,9 @@ export const createTodoCollectionOptions = () => {
     onUpdate: async ({ transaction }) => {
       const db = useClientDatabase();
       const { modified } = transaction.mutations[0];
-      await db.updateTable("todos").set("completedAt", modified.completedAt)
+      await db.updateTable("todos")
+        .set("completedAt", modified.completedAt)
+        .set("dueAt", modified.dueAt)
         .where("id", "==", modified.id)
         .execute();
     },

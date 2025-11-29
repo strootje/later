@@ -1,7 +1,7 @@
 import { createCollection, eq, useLiveQuery } from "@tanstack/solid-db";
 import { createFileRoute } from "@tanstack/solid-router";
 import { cx } from "class-variance-authority";
-import { addDays, formatISOWithOptions, subDays } from "date-fns/fp";
+import { addDays, formatISOWithOptions, intlFormatDistanceWithOptions, subDays } from "date-fns/fp";
 import { createSignal, Index } from "solid-js";
 import { createTodoCollectionOptions } from "../collections/items.ts";
 import { useAppForm } from "../comps/form/hooks.ts";
@@ -60,13 +60,22 @@ export const Route = createFileRoute("/")({
 
             <switchDate.Field name="date">
               {(field) => (
-                <input
-                  type="date"
-                  name={field().name}
-                  value={field().state.value.toISOString().split("T").at(0)}
-                  onblur={field().handleBlur}
-                  onchange={(e) => field().handleChange(new Date(e.target.value))}
-                />
+                <>
+                  <span>
+                    {intlFormatDistanceWithOptions(
+                      { unit: "day" },
+                      formatISOWithOptions({ representation: "date" }, new Date()),
+                      formatISOWithOptions({ representation: "date" }, field().state.value),
+                    )}
+                  </span>
+                  <input
+                    type="date"
+                    name={field().name}
+                    value={formatISOWithOptions({ representation: "date" }, field().state.value)}
+                    onblur={field().handleBlur}
+                    onchange={(e) => field().handleChange(new Date(e.target.value))}
+                  />
+                </>
               )}
             </switchDate.Field>
 
@@ -100,6 +109,19 @@ export const Route = createFileRoute("/")({
                 </button>
 
                 <TodoItem item={item()} />
+
+                <button
+                  type="button"
+                  class={cx("m-2 rounded p-2 shadow-[2px_2px_0_2px] ring-2", item().completedAt ? "ring-lime-200" : "")}
+                  onclick={() => {
+                    todoCollection.update(
+                      item().id,
+                      (item) => item.dueAt = formatISOWithOptions({ representation: "date" }, addDays(3, item.dueAt)),
+                    );
+                  }}
+                >
+                  <i class="i-solar:square-forward-bold-duotone inline-block p-2" />
+                </button>
               </div>
             )}
           </Index>
