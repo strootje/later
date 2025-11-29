@@ -20,7 +20,10 @@ export default defineConfig({
         quoteStyle: "double",
       },
     }),
-    nitroV2Plugin({ preset: "deno-server" }),
+    nitroV2Plugin({
+      preset: "deno-server",
+      compatibilityDate: "2025-11-29",
+    }),
     solid({ ssr: true }),
     sqlocal(),
     uno(),
