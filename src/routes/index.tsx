@@ -61,7 +61,7 @@ export const Route = createFileRoute("/")({
             <switchDate.Field name="date">
               {(field) => (
                 <>
-                  <span class="bg-red">
+                  <span class="rounded bg-red px-2 shadow-[2px_2px_0_2px] ring-2">
                     {intlFormatDistanceWithOptions(
                       { unit: "day" },
                       formatISOWithOptions({ representation: "date" }, new Date()),
