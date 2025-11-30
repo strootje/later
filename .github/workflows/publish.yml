@@ -35,6 +35,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6.0.0
+      - run: echo "PLATFORM_PAIR=${${{ matrix.platform }}////-}" >> $GITHUB_ENV
 
       - uses: docker/login-action@v3.6.0
         with:
@@ -75,10 +76,8 @@ jobs:
 
       - name: Upload digest
         uses: actions/upload-artifact@v5.0.0
-        env:
-          PLATFORM: ${${{ matrix.platform}}////-}
         with:
-          name: digests-${{ env.PLATFORM }}
+          name: digests-${{ env.PLATFORM_PAIR }}
           path: /tmp/digests/*
           if-no-files-found: error
           retention-days: 1
