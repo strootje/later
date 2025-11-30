@@ -8,8 +8,17 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  sourcemaps:
+    runs-on: ubuntu-latest
+
+    steps:
+      - { uses: actions/checkout@v6.0.0 }
+      - { uses: denoland/setup-deno@v2.0.3, with: { cache: true } }
+      - { run: deno task build, env: { SENTRY_TOKEN: "${{ secrets.SENTRY_TOKEN }}" } }
+
   publish:
     runs-on: ubuntu-latest
+    if: false
 
     permissions:
       contents: read

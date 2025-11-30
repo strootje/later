@@ -4,7 +4,7 @@ import { nitroV2Plugin } from "@tanstack/nitro-v2-vite-plugin";
 import { tanstackStart } from "@tanstack/solid-start/plugin/vite";
 import sqlocal from "sqlocal/vite";
 import uno from "unocss/vite";
-import { defineConfig } from "vite";
+import { defineConfig, type Plugin } from "vite";
 import solid from "vite-plugin-solid";
 
 export default defineConfig({
@@ -32,6 +32,6 @@ export default defineConfig({
       url: "https://bugs.strooware.nl",
       org: "does-not-matter",
       project: "later",
-    }),
+    }) as Plugin[],
   ],
 });
