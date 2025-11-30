@@ -76,7 +76,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v5.0.0
         env:
-          PLATFORM: ${${{ matrix.platform}}//\//-}
+          PLATFORM: ${${{ matrix.platform}}////-}
         with:
           name: digests-${{ env.PLATFORM }}
           path: /tmp/digests/*
