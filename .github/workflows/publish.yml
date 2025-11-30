@@ -27,7 +27,7 @@ jobs:
         platform:
           - linux/amd64
           - linux/arm64
-    runs-on: ubuntu-24.04${{ matrix.platform == 'linux/arm64' && '-arm' }}
+    runs-on: ubuntu-24.04${{ matrix.platform == 'linux/arm64' && '-arm' || '' }}
 
     permissions:
       contents: read
