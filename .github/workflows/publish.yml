@@ -35,7 +35,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6.0.0
-      - run: echo "PLATFORM_PAIR=${${{ matrix.platform }}////-}" >> $GITHUB_ENV
+      - run: echo "PLATFORM_PAIR=${${{ matrix.platform }}//\//-}" >> $GITHUB_ENV
 
       - uses: docker/login-action@v3.6.0
         with:
@@ -44,11 +44,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: docker/metadata-action@v5.9.0
-        # with:
-        #   images: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
-        #   tags: |
-        #     type=raw,value=latest
-        #     type=sha,prefix=
+        with: { images: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}" }
         id: meta
 
       - run: docker context create builders
@@ -60,7 +56,6 @@ jobs:
       - uses: docker/build-push-action@v6.18.0
         with:
           context: .
-          platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
           annotations: ${{ steps.meta.outputs.annotations }}
           outputs: type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }},push-by-digest=true,name-canonical=true,push=true,oci-mediatypes=true
