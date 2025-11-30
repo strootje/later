@@ -43,7 +43,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: docker/metadata-action@v5.9.0
-        with: { images: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}" }
+        # with:
+        #   images: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
+        #   tags: |
+        #     type=raw,value=latest
+        #     type=sha,prefix=
         id: meta
 
       - run: docker context create builders
@@ -58,7 +62,7 @@ jobs:
           platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
           annotations: ${{ steps.meta.outputs.annotations }}
-          outputs: type=image,push-by-digest=true,name-canonical=true,push=true,oci-mediatypes=true
+          outputs: type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }},push-by-digest=true,name-canonical=true,push=true,oci-mediatypes=true
           cache-from: type=gha,scope=${{ github.repository }}-${{ github.ref_name }}-${{ matrix.platform }}
           cache-to: type=gha,scope=${{ github.repository }}-${{ github.ref_name }}-${{ matrix.platform }}
         id: build
