@@ -61,7 +61,7 @@ export const Route = createFileRoute("/")({
           <form class="flex justify-center gap-2 pt-1">
             <button
               type="button"
-              class="rounded p-2 ring-2"
+              class="touch-manipulation rounded p-2 ring-2"
               onclick={() => {
                 setDueAt(subDays(1, dueAt()));
               }}
@@ -94,7 +94,7 @@ export const Route = createFileRoute("/")({
 
             <button
               type="button"
-              class="rounded p-2 ring-2"
+              class="touch-manipulation rounded p-2 ring-2"
               onclick={() => {
                 setDueAt(addDays(1, dueAt()));
               }}
@@ -107,7 +107,7 @@ export const Route = createFileRoute("/")({
             <Index each={eachDayOfInterval({ start: firstDayOfWeek(), end: addDays(6, firstDayOfWeek()) })}>
               {(day) => (
                 <span
-                  class="inline-flex flex-col items-center rounded ring-2"
+                  class="inline-flex flex-col touch-manipulation items-center rounded ring-2"
                   classList={{
                     "ring-gray": !isSameDay(day(), dueAt()),
                   }}
@@ -128,7 +128,7 @@ export const Route = createFileRoute("/")({
               <div class="flex gap-2">
                 <button
                   type="button"
-                  class={cx("rounded p-2 ring-2", item().completedAt ? "ring-lime-200" : "")}
+                  class={cx("rounded p-2 ring-2 touch-manipulation", item().completedAt ? "ring-lime-200" : "")}
                   onclick={() => {
                     todoCollection.update(
                       item().id,
@@ -151,7 +151,7 @@ export const Route = createFileRoute("/")({
 
                 <button
                   type="button"
-                  class={cx("rounded p-2 ring-2")}
+                  class={cx("rounded p-2 ring-2 touch-manipulation")}
                   onclick={() => todoCollection.delete(item().id)}
                 >
                   <i class="i-solar:trash-bin-trash-bold-duotone inline-block p-2" />
@@ -159,7 +159,7 @@ export const Route = createFileRoute("/")({
 
                 <button
                   type="button"
-                  class={cx("rounded p-2 ring-2")}
+                  class={cx("rounded p-2 ring-2 touch-manipulation")}
                   onclick={() => {
                     todoCollection.update(
                       item().id,
