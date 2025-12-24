@@ -5,7 +5,7 @@ FROM docker.io/denoland/deno:alpine-${DENO_VERSION} AS deps
 
 WORKDIR /build
 COPY deno.* package.* .
-RUN deno i --allow-scripts=npm:@sentry/cli
+RUN deno i
 
 FROM deps AS build
 COPY *.config.ts .

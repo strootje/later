@@ -12,13 +12,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  sourcemaps:
-    runs-on: ubuntu-latest
+  # sourcemaps:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - { uses: actions/checkout@v6.0.0 }
-      - { uses: denoland/setup-deno@v2.0.3, with: { cache: true } }
-      - { run: deno task build, env: { SENTRY_TOKEN: "${{ secrets.SENTRY_TOKEN }}" } }
+  #   steps:
+  #     - { uses: actions/checkout@v6.0.0 }
+  #     - { uses: denoland/setup-deno@v2.0.3, with: { cache: true } }
+  #     - { run: deno task build, env: { SENTRY_TOKEN: "${{ secrets.SENTRY_TOKEN }}" } }
 # =============================================================================
 
   build:
