@@ -29,5 +29,13 @@ export const createTodoCollectionOptions = () => {
         .where("id", "==", modified.id)
         .execute();
     },
+
+    onDelete: async ({ transaction }) => {
+      const db = useClientDatabase();
+      const { original } = transaction.mutations[0];
+      await db.deleteFrom("todos")
+        .where("id", "==", original.id)
+        .execute();
+    },
   });
 };

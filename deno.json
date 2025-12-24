@@ -4,6 +4,11 @@
     "build": "vite build"
   },
 
+  "allowScripts": [
+    "npm:@parcel/watcher",
+    "npm:@sentry/cli"
+  ],
+
   "nodeModulesDir": "auto",
   "workspace": ["pkgs/**"],
   "compilerOptions": {

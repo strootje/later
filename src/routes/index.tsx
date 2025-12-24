@@ -1,7 +1,16 @@
 import { createCollection, eq, useLiveQuery } from "@tanstack/solid-db";
 import { createFileRoute } from "@tanstack/solid-router";
 import { cx } from "class-variance-authority";
-import { addDays, formatISOWithOptions, intlFormatDistanceWithOptions, subDays } from "date-fns/fp";
+import {
+  addDays,
+  eachDayOfInterval,
+  format,
+  formatISOWithOptions,
+  intlFormatDistanceWithOptions,
+  isSameDay,
+  startOfISOWeek,
+  subDays,
+} from "date-fns/fp";
 import { createSignal, Index } from "solid-js";
 import { createTodoCollectionOptions } from "../collections/items.ts";
 import { useAppForm } from "../comps/form/hooks.ts";
@@ -28,6 +37,8 @@ export const Route = createFileRoute("/")({
       },
     }));
 
+    const firstDayOfWeek = () => startOfISOWeek(dueAt());
+
     const addTodo = useAppForm(() => ({
       defaultValues: {
         title: crypto.randomUUID(),
@@ -47,10 +58,10 @@ export const Route = createFileRoute("/")({
     return (
       <Page>
         <Section>
-          <form class="flex gap-2">
+          <form class="flex justify-center gap-2 pt-1">
             <button
               type="button"
-              class="m-2 rounded p-2 shadow-[2px_2px_0_2px] ring-2"
+              class="rounded p-2 ring-2"
               onclick={() => {
                 setDueAt(subDays(1, dueAt()));
               }}
@@ -61,27 +72,29 @@ export const Route = createFileRoute("/")({
             <switchDate.Field name="date">
               {(field) => (
                 <>
-                  <span class="rounded bg-red px-2 shadow-[2px_2px_0_2px] ring-2">
+                  <span class="inline-block rounded bg-red px-2 py-1 ring-2">
                     {intlFormatDistanceWithOptions(
                       { unit: "day" },
                       formatISOWithOptions({ representation: "date" }, new Date()),
                       formatISOWithOptions({ representation: "date" }, field().state.value),
                     )}
                   </span>
-                  <input
+                  {
+                    /* <input
                     type="date"
                     name={field().name}
                     value={formatISOWithOptions({ representation: "date" }, field().state.value)}
                     onblur={field().handleBlur}
                     onchange={(e) => field().handleChange(new Date(e.target.value))}
-                  />
+                  /> */
+                  }
                 </>
               )}
             </switchDate.Field>
 
             <button
               type="button"
-              class="m-2 rounded p-2 shadow-[2px_2px_0_2px] ring-2"
+              class="rounded p-2 ring-2"
               onclick={() => {
                 setDueAt(addDays(1, dueAt()));
               }}
@@ -89,6 +102,24 @@ export const Route = createFileRoute("/")({
               <i class="i-solar:alt-arrow-right-bold inline-block p-2" />
             </button>
           </form>
+
+          <div class="grid grid-cols-7 gap-2">
+            <Index each={eachDayOfInterval({ start: firstDayOfWeek(), end: addDays(6, firstDayOfWeek()) })}>
+              {(day) => (
+                <span
+                  class="inline-flex flex-col items-center rounded ring-2"
+                  classList={{
+                    "ring-gray": !isSameDay(day(), dueAt()),
+                  }}
+                  onclick={() => setDueAt(day())}
+                >
+                  <div>{format("EEE", day())}</div>
+                  <div>{format("dd", day())}</div>
+                  <div>•</div>
+                </span>
+              )}
+            </Index>
+          </div>
         </Section>
 
         <Section>
@@ -97,22 +128,38 @@ export const Route = createFileRoute("/")({
               <div class="flex gap-2">
                 <button
                   type="button"
-                  class={cx("m-2 rounded p-2 shadow-[2px_2px_0_2px] ring-2", item().completedAt ? "ring-lime-200" : "")}
+                  class={cx("rounded p-2 ring-2", item().completedAt ? "ring-lime-200" : "")}
                   onclick={() => {
                     todoCollection.update(
                       item().id,
-                      (item) => item.completedAt = formatISOWithOptions({ representation: "complete" }, new Date()),
+                      (item) => {
+                        if (item.completedAt == undefined) {
+                          item.completedAt = formatISOWithOptions({ representation: "complete" }, new Date());
+                        } else {
+                          item.completedAt = undefined;
+                        }
+                      },
                     );
                   }}
                 >
                   <i class="i-solar:check-square-bold-duotone inline-block p-2" />
                 </button>
 
-                <TodoItem item={item()} />
+                <span class="inline-block grow">
+                  <TodoItem item={item()} />
+                </span>
 
                 <button
                   type="button"
-                  class={cx("m-2 rounded p-2 shadow-[2px_2px_0_2px] ring-2", item().completedAt ? "ring-lime-200" : "")}
+                  class={cx("rounded p-2 ring-2")}
+                  onclick={() => todoCollection.delete(item().id)}
+                >
+                  <i class="i-solar:trash-bin-trash-bold-duotone inline-block p-2" />
+                </button>
+
+                <button
+                  type="button"
+                  class={cx("rounded p-2 ring-2")}
                   onclick={() => {
                     todoCollection.update(
                       item().id,
