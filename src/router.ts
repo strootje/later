@@ -10,7 +10,7 @@ export const getRouter = () => {
   });
 
   Sentry.init({
-    dsn: "https://f7923fc9bb35424eb020a037de282ba3@bugs.strooware.nl/2",
+    dsn: "https://c50724d1a0d3498d843c7956d0ad2b70@bugs.strooware.nl/1",
     integrations: [tanstackRouterBrowserTracingIntegration(router as any)],
     tracesSampleRate: 1.0,
   });

@@ -29,10 +29,9 @@ export default defineConfig({
     uno(),
     sentryVitePlugin({
       authToken: Deno.env.get("SENTRY_TOKEN"),
-      release: { name: Deno.env.get("SENTRY_RELEASE") ?? "production" },
       url: "https://bugs.strooware.nl",
       org: "does-not-matter",
-      project: "later",
+      project: "app/later",
     }) as Plugin[],
   ],
 });
