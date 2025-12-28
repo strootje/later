@@ -31,7 +31,7 @@ export default defineConfig({
       authToken: Deno.env.get("SENTRY_TOKEN"),
       url: "https://bugs.strooware.nl",
       org: "does-not-matter",
-      project: "app/later",
+      project: "app-later",
     }) as Plugin[],
   ],
 });
