@@ -1,4 +1,3 @@
-import { MigrateToLatest } from "@scope/database/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/solid-router";
 import type { ParentProps } from "solid-js";
@@ -32,7 +31,6 @@ const RootDocument = ({ children }: ParentProps) => (
     </head>
 
     <body>
-      <MigrateToLatest />
       {children}
       <Scripts />
     </body>

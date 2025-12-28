@@ -1,0 +1,6 @@
+{
+  "name": "@strootje/more",
+  "exports": {
+    "./sentry": "./mod.sentry.ts"
+  }
+}

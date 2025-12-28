@@ -14,10 +14,16 @@ export default defineConfig({
   plugins: [
     deno(),
     tanstackStart({
+      client: {
+        entry: "src/entry-client.tsx",
+      },
       router: {
         addExtensions: true,
         generatedRouteTree: "route-tree.gen.ts",
         quoteStyle: "double",
+      },
+      server: {
+        entry: "src/entry-server.ts",
       },
     }),
     nitroV2Plugin({

@@ -1,4 +1,4 @@
-import { useClientDatabase } from "@scope/database/client";
+import { clientDb } from "@scope/database/client";
 import { queryCollectionOptions } from "@tanstack/query-db-collection";
 import { useQueryClient } from "@tanstack/solid-query";
 
@@ -9,19 +9,19 @@ export const createTodoCollectionOptions = () => {
     getKey: (item) => item.id,
 
     queryFn: async () => {
-      const db = useClientDatabase();
+      const db = clientDb.useDatabase();
       return await db.selectFrom("todos").selectAll().execute();
     },
 
     onInsert: async ({ transaction }) => {
-      const db = useClientDatabase();
+      const db = clientDb.useDatabase();
       const { modified } = transaction.mutations[0];
       await db.insertInto("todos").values(modified)
         .execute();
     },
 
     onUpdate: async ({ transaction }) => {
-      const db = useClientDatabase();
+      const db = clientDb.useDatabase();
       const { modified } = transaction.mutations[0];
       await db.updateTable("todos")
         .set("completedAt", modified.completedAt)
@@ -31,7 +31,7 @@ export const createTodoCollectionOptions = () => {
     },
 
     onDelete: async ({ transaction }) => {
-      const db = useClientDatabase();
+      const db = clientDb.useDatabase();
       const { original } = transaction.mutations[0];
       await db.deleteFrom("todos")
         .where("id", "==", original.id)

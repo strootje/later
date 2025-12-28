@@ -1,3 +1,5 @@
+-include .env.local
+
 i:; @deno i
 dev: i; @deno task dev --host
 build:; @podman build -t strootje/later .

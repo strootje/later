@@ -41,7 +41,7 @@ export const Route = createFileRoute("/")({
 
     const addTodo = useAppForm(() => ({
       defaultValues: {
-        title: crypto.randomUUID(),
+        title: "",
         completedAt: undefined,
       },
 
