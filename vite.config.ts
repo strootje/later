@@ -15,7 +15,7 @@ export default defineConfig({
     deno(),
     tanstackStart({
       client: {
-        entry: "src/entry-client.tsx",
+        entry: "entry-client.tsx",
       },
       router: {
         addExtensions: true,
@@ -23,7 +23,7 @@ export default defineConfig({
         quoteStyle: "double",
       },
       server: {
-        entry: "src/entry-server.ts",
+        entry: "entry-server.ts",
       },
     }),
     nitroV2Plugin({
@@ -31,7 +31,7 @@ export default defineConfig({
       compatibilityDate: "2025-11-29",
     }),
     solid({ ssr: true }),
-    sqlocal(),
+    sqlocal() as Plugin,
     uno(),
     sentryVitePlugin({
       authToken: Deno.env.get("SENTRY_TOKEN"),

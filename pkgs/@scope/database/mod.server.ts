@@ -2,7 +2,8 @@ import { Database as Sqlite } from "@jsr/db__sqlite";
 import { DenoSqlite3Dialect } from "@jsr/soapbox__kysely-deno-sqlite";
 import { makeDatabase } from "@jsr/strootje__better-kysely";
 import type { Dialect } from "kysely";
-import type { ServerDatabase } from "./server.models.ts";
+import { server_m001_initial } from "./migrations/server-001-initial.ts";
+import type { ServerDatabase } from "./models/server.models.ts";
 
 let dialect: DenoSqlite3Dialect;
 const getDialect = () => {
@@ -11,4 +12,13 @@ const getDialect = () => {
   })) as any as Dialect;
 };
 
-export const serverDb = makeDatabase<ServerDatabase>(getDialect(), () => Promise.resolve({}));
+export const serverDb = makeDatabase<ServerDatabase>(getDialect(), () => {
+  return Promise.resolve({
+    server_m001_initial,
+  });
+});
+
+export const useDatabaseForBetterAuth = () => ({
+  db: serverDb.useDatabase(),
+  type: "sqlite",
+});

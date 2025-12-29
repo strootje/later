@@ -1,7 +1,7 @@
 import { makeDatabase } from "@jsr/strootje__better-kysely";
 import { SQLocalKysely } from "sqlocal/kysely";
-import { m001_initial } from "./client.migration.001-initial.ts";
-import type { ClientDatabase } from "./client.models.ts";
+import { client_m001_initial } from "./migrations/client-001-initial.ts";
+import type { ClientDatabase } from "./models/client.models.ts";
 
 let sqlocal: SQLocalKysely;
 const useSqlocal = () => {
@@ -14,6 +14,6 @@ const getDialect = () => {
 
 export const clientDb = makeDatabase<ClientDatabase>(getDialect(), () => {
   return Promise.resolve({
-    m001_initial,
+    client_m001_initial,
   });
 });

@@ -2,6 +2,7 @@
   "type": "module",
   "dependencies": {
     "@ark-ui/solid": "^5.30.0",
+    "@better-auth/passkey": "^1.4.9",
     "@deno/vite-plugin": "^1.0.6",
     "@iconify-json/solar": "^1.2.5",
     "@jsr/db__sqlite": "^0.12.0",
@@ -18,6 +19,7 @@
     "@tanstack/solid-router": "^1.144.0",
     "@tanstack/solid-start": "^1.145.0",
     "@unocss/reset": "^66.5.11",
+    "better-auth": "^1.4.9",
     "class-variance-authority": "^0.7.1",
     "date-fns": "^4.1.0",
     "kysely": "^0.28.9",

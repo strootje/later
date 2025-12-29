@@ -1,6 +1,6 @@
 import type { Migration } from "kysely";
 
-export const m001_initial: Migration = {
+export const client_m001_initial: Migration = {
   async up({ schema }) {
     await schema.createTable("todos")
       .addColumn("id", "uuid", (p) => p.unique().notNull())

@@ -22,8 +22,8 @@ export const Route = createFileRoute("/")({
   component: () => {
     const [dueAt, setDueAt] = createSignal(new Date());
     const todoCollection = createCollection(createTodoCollectionOptions());
-    const filteredTodos = useLiveQuery((q) =>
-      q.from({ todo: todoCollection })
+    const filteredTodos = useLiveQuery((p) =>
+      p.from({ todo: todoCollection })
         .where(({ todo }) => eq(todo.dueAt, formatISOWithOptions({ representation: "date" }, dueAt())))
     );
 

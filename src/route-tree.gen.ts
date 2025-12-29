@@ -9,38 +9,75 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from "./routes/__root.tsx"
+import { Route as SignupRouteImport } from "./routes/signup.tsx"
 import { Route as IndexRouteImport } from "./routes/index.tsx"
+import { Route as SettingsAdminUsersRouteImport } from "./routes/settings.admin.users.tsx"
+import { Route as ApiAuthSplatRouteImport } from "./routes/api.auth.$.ts"
 
+const SignupRoute = SignupRouteImport.update({
+  id: "/signup",
+  path: "/signup",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsAdminUsersRoute = SettingsAdminUsersRouteImport.update({
+  id: "/settings/admin/users",
+  path: "/settings/admin/users",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: "/api/auth/$",
+  path: "/api/auth/$",
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
+  "/signup": typeof SignupRoute
+  "/api/auth/$": typeof ApiAuthSplatRoute
+  "/settings/admin/users": typeof SettingsAdminUsersRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
+  "/signup": typeof SignupRoute
+  "/api/auth/$": typeof ApiAuthSplatRoute
+  "/settings/admin/users": typeof SettingsAdminUsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   "/": typeof IndexRoute
+  "/signup": typeof SignupRoute
+  "/api/auth/$": typeof ApiAuthSplatRoute
+  "/settings/admin/users": typeof SettingsAdminUsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/"
+  fullPaths: "/" | "/signup" | "/api/auth/$" | "/settings/admin/users"
   fileRoutesByTo: FileRoutesByTo
-  to: "/"
-  id: "__root__" | "/"
+  to: "/" | "/signup" | "/api/auth/$" | "/settings/admin/users"
+  id: "__root__" | "/" | "/signup" | "/api/auth/$" | "/settings/admin/users"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SignupRoute: typeof SignupRoute
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  SettingsAdminUsersRoute: typeof SettingsAdminUsersRoute
 }
 
 declare module "@tanstack/solid-router" {
   interface FileRoutesByPath {
+    "/signup": {
+      id: "/signup"
+      path: "/signup"
+      fullPath: "/signup"
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     "/": {
       id: "/"
       path: "/"
@@ -48,11 +85,28 @@ declare module "@tanstack/solid-router" {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/settings/admin/users": {
+      id: "/settings/admin/users"
+      path: "/settings/admin/users"
+      fullPath: "/settings/admin/users"
+      preLoaderRoute: typeof SettingsAdminUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/api/auth/$": {
+      id: "/api/auth/$"
+      path: "/api/auth/$"
+      fullPath: "/api/auth/$"
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SignupRoute: SignupRoute,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
+  SettingsAdminUsersRoute: SettingsAdminUsersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
