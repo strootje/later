@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from "./routes/__root.tsx"
 import { Route as SignupRouteImport } from "./routes/signup.tsx"
 import { Route as IndexRouteImport } from "./routes/index.tsx"
 import { Route as SettingsIndexRouteImport } from "./routes/settings.index.tsx"
+import { Route as SettingsCommunicationRouteImport } from "./routes/settings.communication.tsx"
 import { Route as SettingsAdminRouteImport } from "./routes/settings.admin.tsx"
 import { Route as SettingsFeedbackIndexRouteImport } from "./routes/settings.feedback.index.tsx"
 import { Route as SettingsAdminUsersRouteImport } from "./routes/settings.admin.users.tsx"
@@ -30,6 +31,11 @@ const IndexRoute = IndexRouteImport.update({
 const SettingsIndexRoute = SettingsIndexRouteImport.update({
   id: "/settings/",
   path: "/settings/",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsCommunicationRoute = SettingsCommunicationRouteImport.update({
+  id: "/settings/communication",
+  path: "/settings/communication",
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsAdminRoute = SettingsAdminRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/signup": typeof SignupRoute
   "/settings/admin": typeof SettingsAdminRouteWithChildren
+  "/settings/communication": typeof SettingsCommunicationRoute
   "/settings": typeof SettingsIndexRoute
   "/api/auth/$": typeof ApiAuthSplatRoute
   "/settings/admin/users": typeof SettingsAdminUsersRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/signup": typeof SignupRoute
   "/settings/admin": typeof SettingsAdminRouteWithChildren
+  "/settings/communication": typeof SettingsCommunicationRoute
   "/settings": typeof SettingsIndexRoute
   "/api/auth/$": typeof ApiAuthSplatRoute
   "/settings/admin/users": typeof SettingsAdminUsersRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   "/": typeof IndexRoute
   "/signup": typeof SignupRoute
   "/settings/admin": typeof SettingsAdminRouteWithChildren
+  "/settings/communication": typeof SettingsCommunicationRoute
   "/settings/": typeof SettingsIndexRoute
   "/api/auth/$": typeof ApiAuthSplatRoute
   "/settings/admin/users": typeof SettingsAdminUsersRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | "/"
     | "/signup"
     | "/settings/admin"
+    | "/settings/communication"
     | "/settings"
     | "/api/auth/$"
     | "/settings/admin/users"
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | "/"
     | "/signup"
     | "/settings/admin"
+    | "/settings/communication"
     | "/settings"
     | "/api/auth/$"
     | "/settings/admin/users"
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | "/"
     | "/signup"
     | "/settings/admin"
+    | "/settings/communication"
     | "/settings/"
     | "/api/auth/$"
     | "/settings/admin/users"
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SignupRoute: typeof SignupRoute
   SettingsAdminRoute: typeof SettingsAdminRouteWithChildren
+  SettingsCommunicationRoute: typeof SettingsCommunicationRoute
   SettingsIndexRoute: typeof SettingsIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   SettingsFeedbackIndexRoute: typeof SettingsFeedbackIndexRoute
@@ -141,6 +154,13 @@ declare module "@tanstack/solid-router" {
       path: "/settings"
       fullPath: "/settings"
       preLoaderRoute: typeof SettingsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/settings/communication": {
+      id: "/settings/communication"
+      path: "/settings/communication"
+      fullPath: "/settings/communication"
+      preLoaderRoute: typeof SettingsCommunicationRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/settings/admin": {
@@ -190,6 +210,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SignupRoute: SignupRoute,
   SettingsAdminRoute: SettingsAdminRouteWithChildren,
+  SettingsCommunicationRoute: SettingsCommunicationRoute,
   SettingsIndexRoute: SettingsIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   SettingsFeedbackIndexRoute: SettingsFeedbackIndexRoute,

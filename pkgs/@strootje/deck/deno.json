@@ -1,0 +1,8 @@
+{
+  "name": "@strootje/deck",
+  "exports": {
+    "./components/app-bar": "./comp.app-bar.tsx",
+    "./components/page": "./comp.page.tsx",
+    ".": "./mod.main.ts"
+  }
+}

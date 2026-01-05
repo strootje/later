@@ -5,6 +5,8 @@
     "npm:@ark-ui/solid@^5.30.0": "5.30.0_solid-js@1.9.10__seroval@1.3.2_@internationalized+date@3.10.0",
     "npm:@better-auth/passkey@^1.4.10": "1.4.10_@better-auth+core@1.4.10__@better-auth+utils@0.3.0__@better-fetch+fetch@1.1.21__better-call@1.1.7___zod@4.3.4__jose@6.1.3__kysely@0.28.9__nanostores@1.1.0__zod@4.3.4_@better-auth+utils@0.3.0_@better-fetch+fetch@1.1.21_better-auth@1.4.10__solid-js@1.9.10___seroval@1.3.2__@better-auth+utils@0.3.0__@better-fetch+fetch@1.1.21__better-call@1.1.7___zod@4.3.4__jose@6.1.3__kysely@0.28.9__nanostores@1.1.0__@better-auth+core@1.4.10___@better-auth+utils@0.3.0___@better-fetch+fetch@1.1.21___better-call@1.1.7____zod@4.3.4___jose@6.1.3___kysely@0.28.9___nanostores@1.1.0___zod@4.3.4__zod@4.3.4_better-call@1.1.7__zod@4.3.4_nanostores@1.1.0_kysely@0.28.9_solid-js@1.9.10__seroval@1.3.2_zod@4.3.4",
     "npm:@deno/vite-plugin@^1.0.6": "1.0.6_vite@7.3.0__picomatch@4.0.3",
+    "npm:@dicebear/collection@^9.2.4": "9.2.4_@dicebear+core@9.2.4",
+    "npm:@dicebear/core@^9.2.4": "9.2.4",
     "npm:@flipt-io/flipt@^1.5.0": "1.5.0",
     "npm:@iconify-json/solar@^1.2.5": "1.2.5",
     "npm:@jsr/db__sqlite@0.12": "0.12.0",
@@ -27,7 +29,7 @@
     "npm:class-variance-authority@~0.7.1": "0.7.1",
     "npm:date-fns@^4.1.0": "4.1.0",
     "npm:kysely@~0.28.9": "0.28.9",
-    "npm:motion@^12.23.26": "12.23.26",
+    "npm:motion@^12.23.28": "12.23.28",
     "npm:nodemailer@^7.0.12": "7.0.12",
     "npm:solid-js@^1.9.10": "1.9.10_seroval@1.3.2",
     "npm:sqlocal@0.16": "0.16.0_kysely@0.28.9_vite@7.3.0__picomatch@4.0.3",
@@ -776,6 +778,228 @@
       "integrity": "sha512-Sh5XqvFuKAwjARTesi0n6xRpEXm1V0UeqKh+SxIrexCofxOaieNDMqXZD02RiZCg0mrJ43V8eCMuVrDfq6mLmg==",
       "dependencies": [
         "vite"
+      ]
+    },
+    "@dicebear/adventurer-neutral@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-I9IrB4ZYbUHSOUpWoUbfX3vG8FrjcW8htoQ4bEOR7TYOKKE11Mo1nrGMuHZ7GPfwN0CQeK1YVJhWqLTmtYn7Pg==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/adventurer@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-Xvboay3VH1qe7lH17T+bA3qPawf5EjccssDiyhCX/VT0P21c65JyjTIUJV36Nsv08HKeyDscyP0kgt9nPTRKvA==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/avataaars-neutral@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-HtBvA7elRv50QTOOsBdtYB1GVimCpGEDlDgWsu1snL5Z3d1+3dIESoXQd3mXVvKTVT8Z9ciA4TEaF09WfxDjAA==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/avataaars@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-QKNBtA/1QGEzR+JjS4XQyrFHYGbzdOp0oa6gjhGhUDrMegDFS8uyjdRfDQsFTebVkyLWjgBQKZEiDqKqHptB6A==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/big-ears-neutral@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-pPjYu80zMFl43A9sa5+tAKPkhp4n9nd7eN878IOrA1HAowh/XePh5JN8PTkNFS9eM+rnN9m8WX08XYFe30kLYw==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/big-ears@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-U33tbh7Io6wG6ViUMN5fkWPER7hPKMaPPaYgafaYQlCT4E7QPKF2u8X1XGag3jCKm0uf4SLXfuZ8v+YONcHmNQ==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/big-smile@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-zeEfXOOXy7j9tfkPLzfQdLBPyQsctBetTdEfKRArc1k3RUliNPxfJG9j88+cXQC6GXrVW2pcT2X50NSPtugCFQ==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/bottts-neutral@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-eMVdofdD/udHsKIaeWEXShDRtiwk7vp4FjY7l0f79vIzfhkIsXKEhPcnvHKOl/yoArlDVS3Uhgjj0crWTO9RJA==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/bottts@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-4CTqrnVg+NQm6lZ4UuCJish8gGWe8EqSJrzvHQRO5TEyAKjYxbTdVqejpkycG1xkawha4FfxsYgtlSx7UwoVMw==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/collection@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-I1wCUp0yu5qSIeMQHmDYXQIXKkKjcja/SYBxppPkYFXpR2alxb0k9/swFDdMbkY6a1c9AT1kI1y+Pg6ywQ2rTA==",
+      "dependencies": [
+        "@dicebear/adventurer",
+        "@dicebear/adventurer-neutral",
+        "@dicebear/avataaars",
+        "@dicebear/avataaars-neutral",
+        "@dicebear/big-ears",
+        "@dicebear/big-ears-neutral",
+        "@dicebear/big-smile",
+        "@dicebear/bottts",
+        "@dicebear/bottts-neutral",
+        "@dicebear/core",
+        "@dicebear/croodles",
+        "@dicebear/croodles-neutral",
+        "@dicebear/dylan",
+        "@dicebear/fun-emoji",
+        "@dicebear/glass",
+        "@dicebear/icons",
+        "@dicebear/identicon",
+        "@dicebear/initials",
+        "@dicebear/lorelei",
+        "@dicebear/lorelei-neutral",
+        "@dicebear/micah",
+        "@dicebear/miniavs",
+        "@dicebear/notionists",
+        "@dicebear/notionists-neutral",
+        "@dicebear/open-peeps",
+        "@dicebear/personas",
+        "@dicebear/pixel-art",
+        "@dicebear/pixel-art-neutral",
+        "@dicebear/rings",
+        "@dicebear/shapes",
+        "@dicebear/thumbs"
+      ]
+    },
+    "@dicebear/core@9.2.4": {
+      "integrity": "sha512-hz6zArEcUwkZzGOSJkWICrvqnEZY7BKeiq9rqKzVJIc1tRVv0MkR0FGvIxSvXiK9TTIgKwu656xCWAGAl6oh+w==",
+      "dependencies": [
+        "@types/json-schema"
+      ]
+    },
+    "@dicebear/croodles-neutral@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-8vAS9lIEKffSUVx256GSRAlisB8oMX38UcPWw72venO/nitLVsyZ6hZ3V7eBdII0Onrjqw1RDndslQODbVcpTw==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/croodles@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-CqT0NgVfm+5kd+VnjGY4WECNFeOrj5p7GCPTSEA7tCuN72dMQOX47P9KioD3wbExXYrIlJgOcxNrQeb/FMGc3A==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/dylan@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-tiih1358djAq0jDDzmW3N3S4C3ynC2yn4hhlTAq/MaUAQtAi47QxdHdFGdxH0HBMZKqA4ThLdVk3yVgN4xsukg==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/fun-emoji@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-Od729skczse1HvHekgEFv+mSuJKMC4sl5hENGi/izYNe6DZDqJrrD0trkGT/IVh/SLXUFbq1ZFY9I2LoUGzFZg==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/glass@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-5lxbJode1t99eoIIgW0iwZMoZU4jNMJv/6vbsgYUhAslYFX5zP0jVRscksFuo89TTtS7YKqRqZAL3eNhz4bTDw==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/icons@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-bRsK1qj8u9Z76xs8XhXlgVr/oHh68tsHTJ/1xtkX9DeTQTSamo2tS26+r231IHu+oW3mePtFnwzdG9LqEPRd4A==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/identicon@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-R9nw/E8fbu9HltHOqI9iL/o9i7zM+2QauXWMreQyERc39oGR9qXiwgBxsfYGcIS4C85xPyuL5B3I2RXrLBlJPg==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/initials@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-4SzHG5WoQZl1TGcpEZR4bdsSkUVqwNQCOwWSPAoBJa3BNxbVsvL08LF7I97BMgrCoknWZjQHUYt05amwTPTKtg==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/lorelei-neutral@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-bWq2/GonbcJULtT+B/MGcM2UnA7kBQoH+INw8/oW83WI3GNTZ6qEwe3/W4QnCgtSOhUsuwuiSULguAFyvtkOZQ==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/lorelei@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-eS4mPYUgDpo89HvyFAx/kgqSSKh8W4zlUA8QJeIUCWTB0WpQmeqkSgIyUJjGDYSrIujWi+zEhhckksM5EwW0Dg==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/micah@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-XNWJ8Mx+pncIV8Ye0XYc/VkMiax8kTxcP3hLTC5vmELQyMSLXzg/9SdpI+W/tCQghtPZRYTT3JdY9oU9IUlP2g==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/miniavs@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-k7IYTAHE/4jSO6boMBRrNlqPT3bh7PLFM1atfe0nOeCDwmz/qJUBP3HdONajbf3fmo8f2IZYhELrNWTOE7Ox3Q==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/notionists-neutral@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-fskWzBVxQzJhCKqY24DGZbYHSBaauoRa1DgXM7+7xBuksH7mfbTmZTvnUAsAqJYBkla8IPb4ERKduDWtlWYYjQ==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/notionists@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-zcvpAJ93EfC0xQffaPZQuJPShwPhnu9aTcoPsaYGmw0oEDLcv2XYmDhUUdX84QYCn6LtCZH053rHLVazRW+OGw==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/open-peeps@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-s6nwdjXFsplqEI7imlsel4Gt6kFVJm6YIgtZSpry0UdwDoxUUudei5bn957j9lXwVpVUcRjJW+TuEKztYjXkKQ==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/personas@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-JNim8RfZYwb0MfxW6DLVfvreCFIevQg+V225Xe5tDfbFgbcYEp4OU/KaiqqO2476OBjCw7i7/8USbv2acBhjwA==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/pixel-art-neutral@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-ZITPLD1cPN4GjKkhWi80s7e5dcbXy34ijWlvmxbc4eb/V7fZSsyRa9EDUW3QStpo+xrCJLcLR+3RBE5iz0PC/A==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/pixel-art@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-4Ao45asieswUdlCTBZqcoF/0zHR3OWUWB0Mvhlu9b1Fbc6IlPBiOfx2vsp6bnVGVnMag58tJLecx2omeXdECBQ==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/rings@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-teZxELYyV2ogzgb5Mvtn/rHptT0HXo9SjUGS4A52mOwhIdHSGGU71MqA1YUzfae9yJThsw6K7Z9kzuY2LlZZHA==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/shapes@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-MhK9ZdFm1wUnH4zWeKPRMZ98UyApolf5OLzhCywfu38tRN6RVbwtBRHc/42ZwoN1JU1JgXr7hzjYucMqISHtbA==",
+      "dependencies": [
+        "@dicebear/core"
+      ]
+    },
+    "@dicebear/thumbs@9.2.4_@dicebear+core@9.2.4": {
+      "integrity": "sha512-EL4sMqv9p2+1Xy3d8e8UxyeKZV2+cgt3X2x2RTRzEOIIhobtkL8u6lJxmJbiGbpVtVALmrt5e7gjmwqpryYDpg==",
+      "dependencies": [
+        "@dicebear/core"
       ]
     },
     "@esbuild/aix-ppc64@0.25.12": {
@@ -2744,6 +2968,9 @@
     "@types/estree@1.0.8": {
       "integrity": "sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w=="
     },
+    "@types/json-schema@7.0.15": {
+      "integrity": "sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA=="
+    },
     "@types/node@24.2.0": {
       "integrity": "sha512-3xyG3pMCq3oYCNg7/ZP+E1ooTaGB4cG8JWRsqqOYQdbWNY4zbaV0Ennrd7stjiJEFZCaybcIgpTjJWHRfBSIDw==",
       "dependencies": [
@@ -4473,8 +4700,8 @@
     "fractional-indexing@3.2.0": {
       "integrity": "sha512-PcOxmqwYCW7O2ovKRU8OoQQj2yqTfEB/yeTYk4gPid6dN5ODRfU1hXd9tTVZzax/0NkO7AxpHykvZnT1aYp/BQ=="
     },
-    "framer-motion@12.23.26": {
-      "integrity": "sha512-cPcIhgR42xBn1Uj+PzOyheMtZ73H927+uWPDVhUMqxy8UHt6Okavb6xIz9J/phFUHUj0OncR6UvMfJTXoc/LKA==",
+    "framer-motion@12.23.28": {
+      "integrity": "sha512-AXLnVEC/HHWp6Va1l9xl6cIM4SgdZAmgPLGy/h9w07NOxg0njva/A+3uBE3QUQ3uooi8c8c8HPn/8Md9ol0glg==",
       "dependencies": [
         "motion-dom",
         "motion-utils",
@@ -4972,17 +5199,17 @@
         "ufo"
       ]
     },
-    "motion-dom@12.23.23": {
-      "integrity": "sha512-n5yolOs0TQQBRUFImrRfs/+6X4p3Q4n1dUEqt/H58Vx7OW6RF+foWEgmTVDhIWJIMXOuNNL0apKH2S16en9eiA==",
+    "motion-dom@12.23.28": {
+      "integrity": "sha512-XxQ0QDS7nXjug1Q4Z7hwD1DPDM+zJvgteSlQABse1N4F22q6wRLLjBEeMelvJrZNPp9UeS4Q3AVpWzWBLHLmew==",
       "dependencies": [
         "motion-utils"
       ]
     },
-    "motion-utils@12.23.6": {
-      "integrity": "sha512-eAWoPgr4eFEOFfg2WjIsMoqJTW6Z8MTUCgn/GZ3VRpClWBdnbjryiA3ZSNLyxCTmCQx4RmYX6jX1iWHbenUPNQ=="
+    "motion-utils@12.23.28": {
+      "integrity": "sha512-0W6cWd5Okoyf8jmessVK3spOmbyE0yTdNKujHctHH9XdAE4QDuZ1/LjSXC68rrhsJU+TkzXURC5OdSWh9ibOwQ=="
     },
-    "motion@12.23.26": {
-      "integrity": "sha512-Ll8XhVxY8LXMVYTCfme27WH2GjBrCIzY4+ndr5QKxsK+YwCtOi2B/oBi5jcIbik5doXuWT/4KKDOVAZJkeY5VQ==",
+    "motion@12.23.28": {
+      "integrity": "sha512-M82p8rtXO6As30R5Pjrg02l0S6r/wkc8iQO5Db7cxxc/Bz3rLFek2AYp2hVeREdREycVD0HFKGVLW7tPVzgmWQ==",
       "dependencies": [
         "framer-motion",
         "tslib@2.8.1"
@@ -6190,6 +6417,8 @@
         "npm:@ark-ui/solid@^5.30.0",
         "npm:@better-auth/passkey@^1.4.10",
         "npm:@deno/vite-plugin@^1.0.6",
+        "npm:@dicebear/collection@^9.2.4",
+        "npm:@dicebear/core@^9.2.4",
         "npm:@flipt-io/flipt@^1.5.0",
         "npm:@iconify-json/solar@^1.2.5",
         "npm:@jsr/db__sqlite@0.12",
@@ -6212,7 +6441,7 @@
         "npm:class-variance-authority@~0.7.1",
         "npm:date-fns@^4.1.0",
         "npm:kysely@~0.28.9",
-        "npm:motion@^12.23.26",
+        "npm:motion@^12.23.28",
         "npm:nodemailer@^7.0.12",
         "npm:solid-js@^1.9.10",
         "npm:sqlocal@0.16",

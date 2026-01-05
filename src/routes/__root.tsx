@@ -1,5 +1,4 @@
 import { SentryErrorBoundary, SimpleErrorDisplay } from "@strootje/more/sentry";
-import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/solid-router";
 import type { ParentProps } from "solid-js";
 import { HydrationScript } from "solid-js/web";
@@ -19,9 +18,7 @@ export const Route = createRootRoute({
   component: () => (
     <RootDocument>
       <SentryErrorBoundary fallback={SimpleErrorDisplay}>
-        <QueryClientProvider client={new QueryClient()}>
-          <Outlet />
-        </QueryClientProvider>
+        <Outlet />
       </SentryErrorBoundary>
     </RootDocument>
   ),

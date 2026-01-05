@@ -3,6 +3,7 @@ import { DenoSqlite3Dialect } from "@jsr/soapbox__kysely-deno-sqlite";
 import { makeDatabase } from "@jsr/strootje__better-kysely";
 import type { Dialect } from "kysely";
 import { server_m001_initial } from "./migrations/server-001-initial.ts";
+import { server_m002_add_subscriber_id } from "./migrations/server-002-add-subscriber-id.ts";
 import type { ServerDatabase } from "./models/server.models.ts";
 
 let dialect: DenoSqlite3Dialect;
@@ -15,6 +16,7 @@ const getDialect = () => {
 export const serverDb = makeDatabase<ServerDatabase>(getDialect(), () => {
   return Promise.resolve({
     server_m001_initial,
+    server_m002_add_subscriber_id,
   });
 });
 
