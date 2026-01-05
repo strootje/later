@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from "./routes/__root.tsx"
 import { Route as SignupRouteImport } from "./routes/signup.tsx"
 import { Route as IndexRouteImport } from "./routes/index.tsx"
+import { Route as SettingsIndexRouteImport } from "./routes/settings.index.tsx"
+import { Route as SettingsAdminRouteImport } from "./routes/settings.admin.tsx"
+import { Route as SettingsFeedbackIndexRouteImport } from "./routes/settings.feedback.index.tsx"
 import { Route as SettingsAdminUsersRouteImport } from "./routes/settings.admin.users.tsx"
 import { Route as ApiAuthSplatRouteImport } from "./routes/api.auth.$.ts"
 
@@ -24,10 +27,25 @@ const IndexRoute = IndexRouteImport.update({
   path: "/",
   getParentRoute: () => rootRouteImport,
 } as any)
-const SettingsAdminUsersRoute = SettingsAdminUsersRouteImport.update({
-  id: "/settings/admin/users",
-  path: "/settings/admin/users",
+const SettingsIndexRoute = SettingsIndexRouteImport.update({
+  id: "/settings/",
+  path: "/settings/",
   getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsAdminRoute = SettingsAdminRouteImport.update({
+  id: "/settings/admin",
+  path: "/settings/admin",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsFeedbackIndexRoute = SettingsFeedbackIndexRouteImport.update({
+  id: "/settings/feedback/",
+  path: "/settings/feedback/",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsAdminUsersRoute = SettingsAdminUsersRouteImport.update({
+  id: "/users",
+  path: "/users",
+  getParentRoute: () => SettingsAdminRoute,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: "/api/auth/$",
@@ -38,35 +56,68 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/signup": typeof SignupRoute
+  "/settings/admin": typeof SettingsAdminRouteWithChildren
+  "/settings": typeof SettingsIndexRoute
   "/api/auth/$": typeof ApiAuthSplatRoute
   "/settings/admin/users": typeof SettingsAdminUsersRoute
+  "/settings/feedback": typeof SettingsFeedbackIndexRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/signup": typeof SignupRoute
+  "/settings/admin": typeof SettingsAdminRouteWithChildren
+  "/settings": typeof SettingsIndexRoute
   "/api/auth/$": typeof ApiAuthSplatRoute
   "/settings/admin/users": typeof SettingsAdminUsersRoute
+  "/settings/feedback": typeof SettingsFeedbackIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   "/": typeof IndexRoute
   "/signup": typeof SignupRoute
+  "/settings/admin": typeof SettingsAdminRouteWithChildren
+  "/settings/": typeof SettingsIndexRoute
   "/api/auth/$": typeof ApiAuthSplatRoute
   "/settings/admin/users": typeof SettingsAdminUsersRoute
+  "/settings/feedback/": typeof SettingsFeedbackIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/signup" | "/api/auth/$" | "/settings/admin/users"
+  fullPaths:
+    | "/"
+    | "/signup"
+    | "/settings/admin"
+    | "/settings"
+    | "/api/auth/$"
+    | "/settings/admin/users"
+    | "/settings/feedback"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/signup" | "/api/auth/$" | "/settings/admin/users"
-  id: "__root__" | "/" | "/signup" | "/api/auth/$" | "/settings/admin/users"
+  to:
+    | "/"
+    | "/signup"
+    | "/settings/admin"
+    | "/settings"
+    | "/api/auth/$"
+    | "/settings/admin/users"
+    | "/settings/feedback"
+  id:
+    | "__root__"
+    | "/"
+    | "/signup"
+    | "/settings/admin"
+    | "/settings/"
+    | "/api/auth/$"
+    | "/settings/admin/users"
+    | "/settings/feedback/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SignupRoute: typeof SignupRoute
+  SettingsAdminRoute: typeof SettingsAdminRouteWithChildren
+  SettingsIndexRoute: typeof SettingsIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
-  SettingsAdminUsersRoute: typeof SettingsAdminUsersRoute
+  SettingsFeedbackIndexRoute: typeof SettingsFeedbackIndexRoute
 }
 
 declare module "@tanstack/solid-router" {
@@ -85,12 +136,33 @@ declare module "@tanstack/solid-router" {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/settings/": {
+      id: "/settings/"
+      path: "/settings"
+      fullPath: "/settings"
+      preLoaderRoute: typeof SettingsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/settings/admin": {
+      id: "/settings/admin"
+      path: "/settings/admin"
+      fullPath: "/settings/admin"
+      preLoaderRoute: typeof SettingsAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/settings/feedback/": {
+      id: "/settings/feedback/"
+      path: "/settings/feedback"
+      fullPath: "/settings/feedback"
+      preLoaderRoute: typeof SettingsFeedbackIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     "/settings/admin/users": {
       id: "/settings/admin/users"
-      path: "/settings/admin/users"
+      path: "/users"
       fullPath: "/settings/admin/users"
       preLoaderRoute: typeof SettingsAdminUsersRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof SettingsAdminRoute
     }
     "/api/auth/$": {
       id: "/api/auth/$"
@@ -102,11 +174,25 @@ declare module "@tanstack/solid-router" {
   }
 }
 
+interface SettingsAdminRouteChildren {
+  SettingsAdminUsersRoute: typeof SettingsAdminUsersRoute
+}
+
+const SettingsAdminRouteChildren: SettingsAdminRouteChildren = {
+  SettingsAdminUsersRoute: SettingsAdminUsersRoute,
+}
+
+const SettingsAdminRouteWithChildren = SettingsAdminRoute._addFileChildren(
+  SettingsAdminRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SignupRoute: SignupRoute,
+  SettingsAdminRoute: SettingsAdminRouteWithChildren,
+  SettingsIndexRoute: SettingsIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
-  SettingsAdminUsersRoute: SettingsAdminUsersRoute,
+  SettingsFeedbackIndexRoute: SettingsFeedbackIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

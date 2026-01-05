@@ -1,4 +1,5 @@
-import { createCollection, eq, useLiveQuery } from "@tanstack/solid-db";
+import { Form } from "@strootje/more/form";
+import { eq, useLiveQuery } from "@tanstack/solid-db";
 import { createFileRoute } from "@tanstack/solid-router";
 import { cx } from "class-variance-authority";
 import {
@@ -12,18 +13,17 @@ import {
   subDays,
 } from "date-fns/fp";
 import { createSignal, Index } from "solid-js";
-import { createTodoCollectionOptions } from "../collections/items.ts";
 import { useAppForm } from "../comps/form/hooks.ts";
 import { Page, Section } from "../comps/layout.tsx";
 import { TodoItem } from "../comps/todo.tsx";
+import { todoItemCollection } from "../data.collections/items.ts";
 
 export const Route = createFileRoute("/")({
   ssr: false,
   component: () => {
     const [dueAt, setDueAt] = createSignal(new Date());
-    const todoCollection = createCollection(createTodoCollectionOptions());
     const filteredTodos = useLiveQuery((p) =>
-      p.from({ todo: todoCollection })
+      p.from({ todo: todoItemCollection })
         .where(({ todo }) => eq(todo.dueAt, formatISOWithOptions({ representation: "date" }, dueAt())))
     );
 
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/")({
       },
 
       onSubmit({ value }) {
-        const result = todoCollection.insert({
+        const result = todoItemCollection.insert({
           id: crypto.randomUUID(),
           dueAt: formatISOWithOptions({ representation: "date" }, dueAt()),
           ...value,
@@ -130,7 +130,7 @@ export const Route = createFileRoute("/")({
                   type="button"
                   class={cx("rounded p-2 ring-2 touch-manipulation", item().completedAt ? "ring-lime-200" : "")}
                   onclick={() => {
-                    todoCollection.update(
+                    todoItemCollection.update(
                       item().id,
                       (item) => {
                         if (item.completedAt == undefined) {
@@ -152,7 +152,7 @@ export const Route = createFileRoute("/")({
                 <button
                   type="button"
                   class={cx("rounded p-2 ring-2 touch-manipulation")}
-                  onclick={() => todoCollection.delete(item().id)}
+                  onclick={() => todoItemCollection.delete(item().id)}
                 >
                   <i class="i-solar:trash-bin-trash-bold-duotone inline-block p-2" />
                 </button>
@@ -161,7 +161,7 @@ export const Route = createFileRoute("/")({
                   type="button"
                   class={cx("rounded p-2 ring-2 touch-manipulation")}
                   onclick={() => {
-                    todoCollection.update(
+                    todoItemCollection.update(
                       item().id,
                       (item) => item.dueAt = formatISOWithOptions({ representation: "date" }, addDays(3, item.dueAt)),
                     );
@@ -173,15 +173,9 @@ export const Route = createFileRoute("/")({
             )}
           </Index>
 
-          <form
-            onsubmit={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              addTodo.handleSubmit();
-            }}
-          >
+          <Form handler={addTodo}>
             <addTodo.AppField name="title">{(field) => <field.TextInput />}</addTodo.AppField>
-          </form>
+          </Form>
         </Section>
       </Page>
     );

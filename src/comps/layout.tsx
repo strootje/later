@@ -41,8 +41,8 @@ const PageRoot = (props: ComponentProps<"div"> & VariantProps<typeof gridVariant
 const PageHeader = (props: ComponentProps<"header"> & VariantProps<typeof itemVariants>) => {
   const [itemProps, parentProps, headerProps] = splitProps(props, ["hero"], ["children", "class"]);
   return (
-    <header {...headerProps} class={cx(parentProps.class, itemVariants(itemProps))}>
-      <h1>{parentProps.children}</h1>
+    <header {...headerProps} class={cx("text-2xl", parentProps.class, itemVariants(itemProps))}>
+      {parentProps.children}
     </header>
   );
 };
@@ -61,7 +61,7 @@ const SectionRoot = (props: ComponentProps<"section"> & VariantProps<typeof item
 const SectionHeader = (props: ComponentProps<"header"> & VariantProps<typeof itemVariants>) => {
   const [itemProps, parentProps, headerProps] = splitProps(props, ["hero"], ["children", "class"]);
   return (
-    <header {...headerProps} class={cx(parentProps.class, itemVariants(itemProps))}>
+    <header {...headerProps} class={cx("text-xl", parentProps.class, itemVariants(itemProps))}>
       <h2>{parentProps.children}</h2>
     </header>
   );

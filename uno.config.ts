@@ -1,10 +1,12 @@
-import { defineConfig, presetIcons, presetWebFonts, presetWind4 } from "unocss";
+import { presetSafeArea } from "@yeungkc/unocss-preset-safe-area";
+import { defineConfig, type Preset, presetIcons, presetWebFonts, presetWind4 } from "unocss";
 import { presetScrollbar } from "unocss-preset-scrollbar";
 
 export default defineConfig({
   presets: [
     presetWind4(),
     presetScrollbar(),
+    presetSafeArea() as Preset,
 
     presetWebFonts({
       provider: "bunny",
