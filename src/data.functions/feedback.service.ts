@@ -51,11 +51,15 @@ export const addFeedbackPost = createServerFn().inputValidator(v.object({
     title: post.title,
   });
 
-  await fider.as(feedbackUserId).posts(newPost.id).addTag({
+  if (newPost.isErr()) {
+    throw newPost.error;
+  }
+
+  await fider.as(feedbackUserId).posts(newPost.value.id).addTag({
     tag: appTag,
   });
 
-  return newPost;
+  return newPost.value;
 });
 
 export const upvoteFeedbackPost = createServerFn().inputValidator(v.object({

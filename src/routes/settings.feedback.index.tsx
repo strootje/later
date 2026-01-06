@@ -73,7 +73,6 @@ export const Route = createFileRoute("/settings/feedback/")({
 
                     <div class="-mt-1 flex gap-2 text-stone-500 text-xs">
                       <span>{post().user.name}</span>
-                      <span>{post().user.role}</span>
                     </div>
                   </div>
                 </article>
@@ -87,7 +86,7 @@ export const Route = createFileRoute("/settings/feedback/")({
 
           <Portal>
             <Dialog.Backdrop />
-            <Dialog.Positioner class="bg-stone-300">
+            <Dialog.Positioner class="position-absolute bg-stone-300">
               <Dialog.Content>
                 <Dialog.Title>FEEDBACK..</Dialog.Title>
 
@@ -96,7 +95,6 @@ export const Route = createFileRoute("/settings/feedback/")({
                   <button type="submit">toevoegen</button>
                 </Form>
 
-                <Dialog.Description>Dialog Description</Dialog.Description>
                 <Dialog.CloseTrigger class="bg-red">
                   CLOSE
                 </Dialog.CloseTrigger>

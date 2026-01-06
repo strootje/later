@@ -1,4 +1,24 @@
+import { err, ok } from "neverthrow";
 import * as v from "valibot";
+
+const m = {
+  response: <TObjectEntries extends v.ObjectEntries>(result: v.ObjectSchema<TObjectEntries, undefined>) =>
+    v.pipe(
+      v.union([
+        result,
+        v.object({
+          errors: v.array(v.object({ field: v.string(), message: v.string() })),
+        }),
+      ]),
+      v.transform((result) => {
+        if ("errors" in result) {
+          return err(result.errors);
+        }
+
+        return ok(result);
+      }),
+    ),
+};
 
 const post = v.object({
   id: v.number(),
@@ -47,13 +67,6 @@ export const s = {
       res: v.array(post),
     },
 
-    new: {
-      req: v.object({
-        title: v.string(),
-      }),
-      res: post,
-    },
-
     addTag: {
       req: v.object({
         tag: v.string(),
@@ -64,6 +77,19 @@ export const s = {
     addVote: {
       req: v.object({}),
       res: v.object({}),
+    },
+
+    new: {
+      req: v.object({
+        title: v.string(),
+        description: v.optional(v.string()),
+      }),
+      res: m.response(v.object({
+        id: v.number(),
+        number: v.number(),
+        title: v.string(),
+        slug: v.string(),
+      })),
     },
 
     removeVote: {
