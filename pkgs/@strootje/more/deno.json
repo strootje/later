@@ -1,6 +1,7 @@
 {
   "name": "@strootje/more",
   "exports": {
+    "./api": "./mod.api.ts",
     "./form": "./mod.form.tsx",
     "./sentry": "./mod.sentry.tsx"
   }

@@ -1,0 +1,4 @@
+{
+  "name": "@strootje/fider-api",
+  "exports": "./mod.api.ts"
+}

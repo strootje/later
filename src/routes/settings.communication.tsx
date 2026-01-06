@@ -6,7 +6,7 @@ import { getMailingLists, getSubscriber } from "../data.functions/mailing-list.s
 
 export const Route = createFileRoute("/settings/communication")({
   loader: async () => ({
-    lists: (await getMailingLists()).data.results,
+    lists: (await getMailingLists()),
     subscriber: (await getSubscriber()),
   }),
 

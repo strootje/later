@@ -1,6 +1,13 @@
+import { createFiderClient } from "@strootje/fider-api";
 import { createMiddleware, createServerFn } from "@tanstack/solid-start";
 import * as v from "valibot";
 import { getUserMiddleware } from "./user.service.ts";
+
+const appTag = "app-later";
+const client = createFiderClient({
+  baseUri: "https://feedback.strooware.nl",
+  token: "1Wfz1xfqff2GXEkhwCekzStehPwIJpDLDvPDV6Ht0XLXyh5AMHb0NZu9KcU4tmBk",
+});
 
 const getFeedbackUserMiddleware = createMiddleware().middleware([
   getUserMiddleware,
@@ -8,24 +15,11 @@ const getFeedbackUserMiddleware = createMiddleware().middleware([
   context: { user },
   next,
 }) => {
-  const resp = await fetch("https://feedback.strooware.nl/api/v1/users", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      "authorization": "Bearer 1Wfz1xfqff2GXEkhwCekzStehPwIJpDLDvPDV6Ht0XLXyh5AMHb0NZu9KcU4tmBk",
-    },
-    body: JSON.stringify({
-      name: user.email,
-      email: user.email,
-      reference: user.id,
-    }),
+  const { id: feedbackUserId } = await client.users.post({
+    email: user.email,
+    name: user.email,
+    reference: user.id,
   });
-
-  if (!resp.ok) {
-    throw "auth not oke..";
-  }
-
-  const { id: feedbackUserId } = await resp.json() as { id: number };
 
   return next({
     context: {
@@ -39,34 +33,9 @@ export const getFeedbackPosts = createServerFn().middleware([
 ]).handler(async ({
   context: { feedbackUserId },
 }) => {
-  const query = new URLSearchParams({
-    tags: "app-later",
+  return await client.as(feedbackUserId).posts.getAll({
+    tags: [appTag],
   });
-
-  const resp = await fetch(`https://feedback.strooware.nl/api/v1/posts?${query.toString()}`, {
-    headers: {
-      "content-type": "application/json",
-      "authorization": "Bearer 1Wfz1xfqff2GXEkhwCekzStehPwIJpDLDvPDV6Ht0XLXyh5AMHb0NZu9KcU4tmBk",
-      "X-Fider-UserID": `${feedbackUserId}`,
-    },
-  });
-
-  if (!resp.ok) {
-    throw "error..";
-  }
-
-  return await resp.json() as Array<{
-    id: number;
-    number: number;
-    title: string;
-    hasVoted: boolean;
-    votesCount: number;
-    user: {
-      id: number;
-      name: string;
-      role: string;
-    };
-  }>;
 });
 
 export const addFeedbackPost = createServerFn().inputValidator(v.object({
@@ -78,39 +47,13 @@ export const addFeedbackPost = createServerFn().inputValidator(v.object({
   context: { feedbackUserId },
   data: post,
 }) => {
-  const resp = await fetch(`https://feedback.strooware.nl/api/v1/posts`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      "authorization": "Bearer 1Wfz1xfqff2GXEkhwCekzStehPwIJpDLDvPDV6Ht0XLXyh5AMHb0NZu9KcU4tmBk",
-      "X-Fider-UserID": `${feedbackUserId}`,
-    },
-    body: JSON.stringify(post),
+  const newPost = await client.as(feedbackUserId).posts.new({
+    title: post.title,
   });
 
-  if (!resp.ok) {
-    throw "error;..";
-  }
-
-  const newPost = await resp.json() as {
-    id: number;
-    number: number;
-    title: string;
-    slug: string;
-  };
-
-  const tagResp = await fetch(`https://feedback.strooware.nl/api/v1/posts/${newPost.id}/tags/app-later`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      "authorization": "Bearer 1Wfz1xfqff2GXEkhwCekzStehPwIJpDLDvPDV6Ht0XLXyh5AMHb0NZu9KcU4tmBk",
-      "X-Fider-UserID": `${feedbackUserId}`,
-    },
+  await client.as(feedbackUserId).posts(newPost.id).addTag({
+    tag: appTag,
   });
-
-  if (!tagResp.ok) {
-    throw "error for tag..";
-  }
 
   return newPost;
 });
@@ -124,16 +67,9 @@ export const upvoteFeedbackPost = createServerFn().inputValidator(v.object({
   context: { feedbackUserId },
   data: { remove, postId },
 }) => {
-  const resp = await fetch(`https://feedback.strooware.nl/api/v1/posts/${postId}/votes`, {
-    method: remove ? "DELETE" : "POST",
-    headers: {
-      "content-type": "application/json",
-      "authorization": "Bearer 1Wfz1xfqff2GXEkhwCekzStehPwIJpDLDvPDV6Ht0XLXyh5AMHb0NZu9KcU4tmBk",
-      "X-Fider-UserID": `${feedbackUserId}`,
-    },
-  });
-
-  if (!resp.ok) {
-    throw "error";
+  if (remove) {
+    await client.as(feedbackUserId).posts(postId).removeVote({});
+  } else {
+    await client.as(feedbackUserId).posts(postId).addVote({});
   }
 });
