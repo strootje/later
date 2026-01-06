@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/solid-router";
 import { Index } from "solid-js";
 import { Page, Section } from "../comps/layout.tsx";
 import { Menu } from "../comps/menu.tsx";
-import { getMailingLists, getSubscriber } from "../data.functions/mailing-list.service.ts";
+import { getMailingLists, getSubscriber, updateSubscriber } from "../data.functions/mailing-list.service.ts";
 
 export const Route = createFileRoute("/settings/communication")({
   loader: async () => ({
@@ -38,6 +38,7 @@ export const Route = createFileRoute("/settings/communication")({
                   <input
                     type="checkbox"
                     checked={data().subscriber.lists.find((p) => p.id === list().id) !== undefined}
+                    oninput={(e) => updateSubscriber({ data: { listId: list().id, subscribe: e.target.checked } })}
                   />
                 </div>
               )}

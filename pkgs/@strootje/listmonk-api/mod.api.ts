@@ -15,14 +15,23 @@ export const createListmonkClient = map(s.listmonk, ({ authorization, baseUri })
         });
       }),
     }),
+
     subscribers: Object.assign((subscriberId: number) => ({
       get: reqres(s.subscribers.get, (opts) => {
         return fetch(`${baseUri}/api/subscribers/${subscriberId}`, {
           headers,
         });
       }),
+
+      update: reqres(s.subscribers.update, (input) => {
+        return fetch(`${baseUri}/api/subscribers/${subscriberId}`, {
+          body: JSON.stringify(input),
+          method: "PUT",
+          headers,
+        });
+      }),
     }), {
-      post: reqres(s.subscribers.post, (body) => {
+      new: reqres(s.subscribers.new, (body) => {
         return fetch(`${baseUri}/api/subscribers`, {
           body: JSON.stringify(body),
           method: "POST",

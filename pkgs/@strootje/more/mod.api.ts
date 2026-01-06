@@ -8,6 +8,7 @@ function validate(schema: SS, data: unknown) {
   }
 
   if (result.issues) {
+    console.error("validate/error", result);
     throw result.issues;
   }
 

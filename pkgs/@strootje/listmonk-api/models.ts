@@ -7,6 +7,12 @@ const m = {
       v.transform(({ data }) => data),
     );
   },
+  response2: <TEntries extends v.ObjectEntries>(data: v.ObjectSchema<TEntries, undefined>) => {
+    return v.pipe(
+      v.object({ data }),
+      // v.transform(({ data }) => data),
+    );
+  },
 
   paged: <TEntries extends v.ObjectEntries>(result: v.ObjectSchema<TEntries, undefined>) => {
     return v.object({
@@ -32,7 +38,7 @@ const list = v.object({
   type: v.string(),
   optin: v.string(),
   tags: v.array(v.string()),
-  subscriber_count: v.number(),
+  subscriber_count: v.optional(v.number()),
   description: v.string(),
 });
 
@@ -49,7 +55,11 @@ const subscriber = v.object({
 });
 
 const newSubscriber = v.object({
+  attribs: v.optional(v.record(v.string(), v.any())),
+  preconfirm_subscriptions: v.optional(v.boolean()),
   status: v.optional(subscriberStatus, "enabled"),
+  list_uuids: v.optional(v.array(v.string())),
+  lists: v.optional(v.array(v.number())),
   email: v.string(),
   name: v.string(),
 });
@@ -93,7 +103,12 @@ export const s = {
       res: m.response(subscriber),
     },
 
-    post: {
+    new: {
+      req: newSubscriber,
+      res: m.response(subscriber),
+    },
+
+    update: {
       req: newSubscriber,
       res: m.response(subscriber),
     },

@@ -4,7 +4,7 @@ import * as v from "valibot";
 import { getUserMiddleware } from "./user.service.ts";
 
 const appTag = "app-later";
-const client = createFiderClient({
+const fider = createFiderClient({
   baseUri: "https://feedback.strooware.nl",
   token: "1Wfz1xfqff2GXEkhwCekzStehPwIJpDLDvPDV6Ht0XLXyh5AMHb0NZu9KcU4tmBk",
 });
@@ -15,7 +15,7 @@ const getFeedbackUserMiddleware = createMiddleware().middleware([
   context: { user },
   next,
 }) => {
-  const { id: feedbackUserId } = await client.users.post({
+  const { id: feedbackUserId } = await fider.users.post({
     email: user.email,
     name: user.email,
     reference: user.id,
@@ -33,7 +33,7 @@ export const getFeedbackPosts = createServerFn().middleware([
 ]).handler(async ({
   context: { feedbackUserId },
 }) => {
-  return await client.as(feedbackUserId).posts.getAll({
+  return await fider.as(feedbackUserId).posts.getAll({
     tags: [appTag],
   });
 });
@@ -47,11 +47,11 @@ export const addFeedbackPost = createServerFn().inputValidator(v.object({
   context: { feedbackUserId },
   data: post,
 }) => {
-  const newPost = await client.as(feedbackUserId).posts.new({
+  const newPost = await fider.as(feedbackUserId).posts.new({
     title: post.title,
   });
 
-  await client.as(feedbackUserId).posts(newPost.id).addTag({
+  await fider.as(feedbackUserId).posts(newPost.id).addTag({
     tag: appTag,
   });
 
@@ -68,8 +68,8 @@ export const upvoteFeedbackPost = createServerFn().inputValidator(v.object({
   data: { remove, postId },
 }) => {
   if (remove) {
-    await client.as(feedbackUserId).posts(postId).removeVote({});
+    await fider.as(feedbackUserId).posts(postId).removeVote({});
   } else {
-    await client.as(feedbackUserId).posts(postId).addVote({});
+    await fider.as(feedbackUserId).posts(postId).addVote({});
   }
 });
