@@ -7,7 +7,10 @@ const m = {
       v.union([
         result,
         v.object({
-          errors: v.array(v.object({ field: v.string(), message: v.string() })),
+          errors: v.array(v.object({
+            field: v.optional(v.string()),
+            message: v.string(),
+          })),
         }),
       ]),
       v.transform((result) => {
@@ -52,8 +55,27 @@ export const s = {
     })),
   ),
 
+  post: {
+    addTag: {
+      req: v.object({
+        tag: v.string(),
+      }),
+      res: v.object({}),
+    },
+
+    addVote: {
+      req: v.object({}),
+      res: v.object({}),
+    },
+
+    removeVote: {
+      req: v.object({}),
+      res: v.object({}),
+    },
+  },
+
   posts: {
-    getAll: {
+    list: {
       req: v.pipe(
         v.object({
           tags: v.optional(v.array(v.string()), []),
@@ -67,19 +89,7 @@ export const s = {
       res: v.array(post),
     },
 
-    addTag: {
-      req: v.object({
-        tag: v.string(),
-      }),
-      res: v.object({}),
-    },
-
-    addVote: {
-      req: v.object({}),
-      res: v.object({}),
-    },
-
-    new: {
+    create: {
       req: v.object({
         title: v.string(),
         description: v.optional(v.string()),
@@ -91,15 +101,10 @@ export const s = {
         slug: v.string(),
       })),
     },
-
-    removeVote: {
-      req: v.object({}),
-      res: v.object({}),
-    },
   },
 
   users: {
-    post: {
+    create: {
       req: v.object({
         reference: v.string(),
         email: v.string(),

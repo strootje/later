@@ -1,14 +1,10 @@
-import { Dialog } from "@ark-ui/solid/dialog";
-import { Form } from "@strootje/more/form";
 import { useLiveQuery } from "@tanstack/solid-db";
 import { createFileRoute, Link } from "@tanstack/solid-router";
 import { Index } from "solid-js";
-import { Portal } from "solid-js/web";
-import { useAppForm } from "../comps/form/hooks.ts";
-import { Page, Section } from "../comps/layout.tsx";
-import { Menu } from "../comps/menu.tsx";
-import { feedbackPostCollection } from "../data.collections/feedback.ts";
-import { addFeedbackPost } from "../data.functions/feedback.service.ts";
+import { AddFeedbackModal } from "../comps.modals/modal.add-feedback.tsx";
+import { Page, Section } from "../comps.ui.shell/layout.tsx";
+import { Menu } from "../comps.ui.shell/menu.tsx";
+import { feedbackPostCollection } from "../data.collections/feedback-post.collection.ts";
 
 export const Route = createFileRoute("/settings/feedback/")({
   component: () => {
@@ -16,20 +12,6 @@ export const Route = createFileRoute("/settings/feedback/")({
       return p.from({ post: feedbackPostCollection })
         .orderBy(({ post }) => post.votesCount, "desc");
     });
-
-    const addFeedbackForm = useAppForm(() => ({
-      defaultValues: {
-        title: "",
-      },
-
-      async onSubmit({ value }) {
-        await addFeedbackPost({
-          data: { title: value.title },
-        });
-
-        feedbackPostCollection.utils.refetch();
-      },
-    }));
 
     const toggleUpvote = (postId: number, hasVoted: boolean) => {
       feedbackPostCollection.update(postId, (draft) => {
@@ -81,27 +63,7 @@ export const Route = createFileRoute("/settings/feedback/")({
           </Menu>
         </Section>
 
-        <Dialog.Root>
-          <Dialog.Trigger>NEW FEEDBACK</Dialog.Trigger>
-
-          <Portal>
-            <Dialog.Backdrop />
-            <Dialog.Positioner class="position-absolute bg-stone-300">
-              <Dialog.Content>
-                <Dialog.Title>FEEDBACK..</Dialog.Title>
-
-                <Form handler={addFeedbackForm}>
-                  <addFeedbackForm.AppField name="title">{(field) => <field.TextInput />}</addFeedbackForm.AppField>
-                  <button type="submit">toevoegen</button>
-                </Form>
-
-                <Dialog.CloseTrigger class="bg-red">
-                  CLOSE
-                </Dialog.CloseTrigger>
-              </Dialog.Content>
-            </Dialog.Positioner>
-          </Portal>
-        </Dialog.Root>
+        <AddFeedbackModal />
       </Page>
     );
   },

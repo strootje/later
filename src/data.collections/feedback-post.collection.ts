@@ -1,16 +1,15 @@
+import { singleQueryClient } from "@strootje/more/query";
 import { queryCollectionOptions } from "@tanstack/query-db-collection";
 import { createCollection } from "@tanstack/solid-db";
 import { getFeedbackPosts, upvoteFeedbackPost } from "../data.functions/feedback.service.ts";
-import { useQueryClient } from "./query-client.ts";
 
 export const feedbackPostCollection = createCollection(queryCollectionOptions({
-  queryClient: useQueryClient(),
+  queryClient: singleQueryClient(),
   queryKey: ["server:feedback:posts"],
+  queryFn: () => getFeedbackPosts(),
   getKey: (item) => item.id,
 
-  queryFn: async () => {
-    const posts = await getFeedbackPosts();
-    return posts;
+  onInsert: async ({ transaction }) => {
   },
 
   onUpdate: async ({ transaction }) => {

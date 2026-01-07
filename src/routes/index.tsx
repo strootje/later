@@ -13,10 +13,10 @@ import {
   subDays,
 } from "date-fns/fp";
 import { createSignal, Index } from "solid-js";
-import { useAppForm } from "../comps/form/hooks.ts";
-import { Page, Section } from "../comps/layout.tsx";
-import { TodoItem } from "../comps/todo.tsx";
-import { todoItemCollection } from "../data.collections/items.ts";
+import { useAppForm } from "../comps.form/hooks.ts";
+import { Page, Section } from "../comps.ui.shell/layout.tsx";
+import { TodoItem } from "../comps.ui/todo.tsx";
+import { todoItemCollection } from "../data.collections/todo-item.collection.ts";
 
 export const Route = createFileRoute("/")({
   ssr: false,
@@ -61,7 +61,7 @@ export const Route = createFileRoute("/")({
           <form class="flex justify-center gap-2 pt-1">
             <button
               type="button"
-              class="touch-manipulation rounded p-2 ring-2"
+              class="touch-manipulation rounded bg-white p-2 ring-2"
               onclick={() => {
                 setDueAt(subDays(1, dueAt()));
               }}
@@ -94,7 +94,7 @@ export const Route = createFileRoute("/")({
 
             <button
               type="button"
-              class="touch-manipulation rounded p-2 ring-2"
+              class="touch-manipulation rounded bg-white p-2 ring-2"
               onclick={() => {
                 setDueAt(addDays(1, dueAt()));
               }}
@@ -107,9 +107,9 @@ export const Route = createFileRoute("/")({
             <Index each={eachDayOfInterval({ start: firstDayOfWeek(), end: addDays(6, firstDayOfWeek()) })}>
               {(day) => (
                 <span
-                  class="inline-flex flex-col touch-manipulation items-center rounded ring-2"
+                  class="inline-flex flex-col touch-manipulation items-center rounded bg-white ring-2"
                   classList={{
-                    "ring-gray": !isSameDay(day(), dueAt()),
+                    "shadow-[2px_2px_0_2px]": isSameDay(day(), dueAt()),
                   }}
                   onclick={() => setDueAt(day())}
                 >
@@ -173,7 +173,7 @@ export const Route = createFileRoute("/")({
             )}
           </Index>
 
-          <Form handler={addTodo}>
+          <Form for={addTodo}>
             <addTodo.AppField name="title">{(field) => <field.TextInput />}</addTodo.AppField>
           </Form>
         </Section>

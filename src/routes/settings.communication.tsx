@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/solid-router";
 import { Index } from "solid-js";
-import { Page, Section } from "../comps/layout.tsx";
-import { Menu } from "../comps/menu.tsx";
+import { Page, Section } from "../comps.ui.shell/layout.tsx";
+import { Menu } from "../comps.ui.shell/menu.tsx";
 import { getMailingLists, getSubscriber, updateSubscriber } from "../data.functions/mailing-list.service.ts";
 
 export const Route = createFileRoute("/settings/communication")({

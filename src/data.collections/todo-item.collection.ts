@@ -1,10 +1,10 @@
 import { clientDb } from "@scope/database/client";
+import { singleQueryClient } from "@strootje/more/query";
 import { queryCollectionOptions } from "@tanstack/query-db-collection";
 import { createCollection } from "@tanstack/solid-db";
-import { useQueryClient } from "./query-client.ts";
 
 export const todoItemCollection = createCollection(queryCollectionOptions({
-  queryClient: useQueryClient(),
+  queryClient: singleQueryClient(),
   queryKey: ["local:todos"],
   getKey: (item) => item.id,
 

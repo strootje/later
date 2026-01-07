@@ -1,6 +1,6 @@
 import { QueryClient } from "@tanstack/solid-query";
 
 let queryClient: QueryClient;
-export const useQueryClient = () => {
+export const singleQueryClient = () => {
   return queryClient ??= new QueryClient();
 };

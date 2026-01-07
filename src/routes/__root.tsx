@@ -5,7 +5,7 @@ import { HydrationScript } from "solid-js/web";
 
 import "@unocss/reset/tailwind.css";
 import "virtual:uno.css";
-import { AppBar } from "../comps/app-bar.tsx";
+import { AppBar } from "../comps.ui.shell/app-bar.tsx";
 
 export const Route = createRootRoute({
   head: () => ({

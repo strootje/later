@@ -15,7 +15,7 @@ const getFeedbackUserMiddleware = createMiddleware().middleware([
   context: { user },
   next,
 }) => {
-  const { id: feedbackUserId } = await fider.users.post({
+  const { id: feedbackUserId } = await fider.users.create({
     email: user.email,
     name: user.email,
     reference: user.id,
@@ -33,7 +33,7 @@ export const getFeedbackPosts = createServerFn().middleware([
 ]).handler(async ({
   context: { feedbackUserId },
 }) => {
-  return await fider.as(feedbackUserId).posts.getAll({
+  return await fider.as(feedbackUserId).posts.list({
     tags: [appTag],
   });
 });
@@ -47,7 +47,7 @@ export const addFeedbackPost = createServerFn().inputValidator(v.object({
   context: { feedbackUserId },
   data: post,
 }) => {
-  const newPost = await fider.as(feedbackUserId).posts.new({
+  const newPost = await fider.as(feedbackUserId).posts.create({
     title: post.title,
   });
 

@@ -1,14 +1,14 @@
 import { useLiveQuery } from "@tanstack/solid-db";
 import { createFileRoute, Link } from "@tanstack/solid-router";
 import { Index } from "solid-js";
-import { Page, Section } from "../comps/layout.tsx";
-import { Menu } from "../comps/menu.tsx";
-import { UserCard } from "../comps/user-card.tsx";
-import { adminUserCollection } from "../data.collections/admin.users.ts";
+import { Page, Section } from "../comps.ui.shell/layout.tsx";
+import { Menu } from "../comps.ui.shell/menu.tsx";
+import { UserCard } from "../comps.ui/user-card.tsx";
+import { userCollection } from "../data.collections/user.collection.ts";
 
 export const Route = createFileRoute("/settings/admin/users")({
   component: () => {
-    const users = useLiveQuery((p) => p.from({ user: adminUserCollection }));
+    const users = useLiveQuery((p) => p.from({ user: userCollection }));
 
     return (
       <Page>

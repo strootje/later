@@ -5,44 +5,44 @@ export const createFiderClient = map(s.fider, ({ authorization, baseUri }) => {
   const buildApi = (headers: Headers) => {
     return {
       posts: Object.assign((postId: number) => ({
-        addTag: reqres(s.posts.addTag, ({ tag }) => {
+        addTag: reqres(s.post.addTag, ({ tag }) => {
           return fetch(`${baseUri}/api/v1/posts/${postId}/tags/${tag}`, {
             method: "POST",
             headers,
           });
         }),
 
-        addVote: reqres(s.posts.addVote, () => {
+        addVote: reqres(s.post.addVote, () => {
           return fetch(`${baseUri}/api/v1/posts/${postId}/votes`, {
             method: "POST",
             headers,
           });
         }),
 
-        removeVote: reqres(s.posts.removeVote, () => {
+        removeVote: reqres(s.post.removeVote, () => {
           return fetch(`${baseUri}/api/v1/posts/${postId}/votes`, {
             method: "DELETE",
             headers,
           });
         }),
       }), {
-        getAll: reqres(s.posts.getAll, ({ query }) => {
-          return fetch(`${baseUri}/api/v1/posts?${query}`, {
-            headers,
-          });
-        }),
-
-        new: reqres(s.posts.new, (input) => {
+        create: reqres(s.posts.create, (input) => {
           return fetch(`${baseUri}/api/v1/posts`, {
             body: JSON.stringify(input),
             method: "POST",
             headers,
           });
         }),
+
+        list: reqres(s.posts.list, ({ query }) => {
+          return fetch(`${baseUri}/api/v1/posts?${query}`, {
+            headers,
+          });
+        }),
       }),
 
       users: {
-        post: reqres(s.users.post, (input) => {
+        create: reqres(s.users.create, (input) => {
           return fetch(`${baseUri}/api/v1/users`, {
             body: JSON.stringify(input),
             method: "POST",
