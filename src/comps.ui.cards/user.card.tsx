@@ -1,6 +1,6 @@
 import type { serverAuth } from "@scope/better-auth/server";
 import type { InferUser } from "better-auth";
-import { Avatar } from "./avatar.tsx";
+import { Avatar } from "../comps.ui/avatar.tsx";
 
 export const UserCard = (props: { user: InferUser<typeof serverAuth> }) => {
   return (

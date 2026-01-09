@@ -2,7 +2,7 @@ import { animate, press } from "motion";
 import { Index, JSX, onMount, type ParentProps, splitProps } from "solid-js";
 
 type SwiperAction = {
-  action: () => Promise<void>;
+  action?: () => Promise<void>;
   comp: JSX.Element;
 };
 
@@ -14,7 +14,7 @@ type SwiperProps = {
 };
 
 export const Swiper = (props: ParentProps & SwiperProps) => {
-  const [parentProps, swiperProps] = splitProps(props, ["children"]);
+  const [loProps, swiperProps] = splitProps(props, ["children"]);
   let ref!: HTMLDivElement;
 
   onMount(() => {
@@ -25,10 +25,18 @@ export const Swiper = (props: ParentProps & SwiperProps) => {
   });
 
   return (
-    <div ref={ref}>
-      <Index each={swiperProps.actions?.left ?? []}>{(action) => action().comp}</Index>
-      <div>{parentProps.children}</div>
-      <Index each={swiperProps.actions?.right ?? []}>{(action) => action().comp}</Index>
+    <div ref={ref} class="flex overflow-hidden">
+      <div style={{ width: 0 }}>
+        <Index each={swiperProps.actions?.left ?? []}>{(action) => action().comp}</Index>
+      </div>
+
+      <div class="w-full">
+        {loProps.children}
+      </div>
+
+      <div style={{ width: 0 }}>
+        <Index each={swiperProps.actions?.right ?? []}>{(action) => action().comp}</Index>
+      </div>
     </div>
   );
 };

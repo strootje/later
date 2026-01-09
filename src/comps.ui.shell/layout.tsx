@@ -33,7 +33,10 @@ const itemVariants = cva(["grid grid-cols-subgrid"], {
 const PageRoot = (props: ComponentProps<"div"> & VariantProps<typeof gridVariants>) => {
   const [gridProps, parentProps, divProps] = splitProps(props, ["spacing"], ["children", "class"]);
   return (
-    <div {...divProps} class={cx("bg-yellow-300 min-h-dvh content-start", parentProps.class, gridVariants(gridProps))}>
+    <div
+      {...divProps}
+      class={cx("bg-brand-50 min-h-dvh content-start", parentProps.class, gridVariants(gridProps))}
+    >
       {parentProps.children}
     </div>
   );

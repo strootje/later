@@ -1,12 +1,14 @@
-import type { GeneratedAlways } from "kysely";
+import type { GeneratedAlways, Selectable } from "kysely";
 
 export type ClientDatabase = {
-  todos: Todo;
+  todos: TodoItem;
 };
 
-type Todo = {
+type TodoItem = {
   id: GeneratedAlways<string>;
   title: string;
   dueAt: string;
   completedAt?: string;
 };
+
+export type SelectedTodoItem = Selectable<TodoItem>;

@@ -1,9 +1,9 @@
 import { clientAuth } from "@scope/better-auth/client";
 import { createFileRoute, Link } from "@tanstack/solid-router";
 import { Show } from "solid-js";
+import { UserCard } from "../comps.ui.cards/user.card.tsx";
 import { Page, Section } from "../comps.ui.shell/layout.tsx";
 import { Menu } from "../comps.ui.shell/menu.tsx";
-import { UserCard } from "../comps.ui/user-card.tsx";
 import { findUser } from "../data.functions/user.service.ts";
 
 export const Route = createFileRoute("/settings/")({
