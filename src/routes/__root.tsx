@@ -1,9 +1,6 @@
-import { SentryErrorBoundary, SimpleErrorDisplay } from "@strootje/more/sentry";
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/solid-router";
-import type { ParentProps } from "solid-js";
-import { HydrationScript } from "solid-js/web";
-
 import "@unocss/reset/tailwind.css";
+import { HydrationScript } from "solid-js/web";
 import "virtual:uno.css";
 import { AppBar } from "../comps.ui.shell/app-bar.tsx";
 
@@ -16,25 +13,25 @@ export const Route = createRootRoute({
   }),
 
   component: () => (
-    <RootDocument>
-      <SentryErrorBoundary fallback={SimpleErrorDisplay}>
+    <html>
+      <head>
+        <HeadContent />
+        <HydrationScript />
+      </head>
+
+      <body>
         <Outlet />
-      </SentryErrorBoundary>
-    </RootDocument>
+        <AppBar />
+        <Scripts />
+      </body>
+    </html>
   ),
+
+  errorComponent: ({ error }) => {
+    return <code>error: {error.message}</code>;
+  },
+
+  notFoundComponent: ({ routeId }) => {
+    return <code>not found.. {routeId}</code>;
+  },
 });
-
-const RootDocument = ({ children }: ParentProps) => (
-  <html>
-    <head>
-      <HeadContent />
-      <HydrationScript />
-    </head>
-
-    <body>
-      {children}
-      <AppBar />
-      <Scripts />
-    </body>
-  </html>
-);
