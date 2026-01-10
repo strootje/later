@@ -1,12 +1,14 @@
 import { createListmonkClient } from "@strootje/listmonk-api";
-import { createMiddleware, createServerFn } from "@tanstack/solid-start";
+import { createMiddleware, createServerFn, createServerOnlyFn } from "@tanstack/solid-start";
 import * as v from "valibot";
 import { getUserMiddleware, updateUser } from "./user.service.ts";
 
-const listmonk = createListmonkClient({
-  baseUri: "https://lists.strooware.nl",
-  token: "oIuz1XoK5G6Uj1n93efZGR5oaNw2TV4v",
-  login: "later",
+const listmonk = createServerOnlyFn(() => {
+  return createListmonkClient({
+    baseUri: "https://lists.strooware.nl",
+    token: import.meta.env.LISTMONK_API_TOKEN,
+    login: import.meta.env.LISTMONK_API_LOGIN,
+  });
 });
 
 const getSubscriberMiddleware = createMiddleware().middleware([
@@ -18,12 +20,12 @@ const getSubscriberMiddleware = createMiddleware().middleware([
   if (user.subscriberId) {
     return await next({
       context: {
-        subscriber: await listmonk.subscribers(user.subscriberId).get({}),
+        subscriber: await listmonk().subscribers(user.subscriberId).get({}),
       },
     });
   }
 
-  const subscriber = await listmonk.subscribers.new({
+  const subscriber = await listmonk().subscribers.new({
     email: user.email,
     name: user.name,
   });
@@ -56,7 +58,7 @@ export const updateSubscriber = createServerFn().middleware([
   context: { subscriber },
   data: { listId, subscribe },
 }) => {
-  return listmonk.subscribers(subscriber.id).update({
+  return listmonk().subscribers(subscriber.id).update({
     ...subscriber,
     lists: [
       ...subscriber.lists.filter((p) => subscribe || p.id !== listId).map((p) => p.id),
@@ -66,7 +68,7 @@ export const updateSubscriber = createServerFn().middleware([
 });
 
 export const getMailingLists = createServerFn().handler(async () => {
-  const lists = await listmonk.lists.get({
+  const lists = await listmonk().lists.get({
     tags: ["app-later"],
   });
 
