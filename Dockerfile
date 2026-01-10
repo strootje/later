@@ -16,4 +16,7 @@ RUN deno task build
 FROM docker.io/denoland/deno:alpine-${DENO_VERSION}
 WORKDIR /app
 COPY --from=build /build/.output .
+
+EXPOSE 3000
+VOLUME /data
 CMD ["deno", "run", "--allow-all", "server/index.mjs"]

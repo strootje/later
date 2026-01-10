@@ -10,6 +10,8 @@
     "@iconify-json/solar": "^1.2.5",
     "@jsr/db__sqlite": "^0.12.0",
     "@jsr/soapbox__kysely-deno-sqlite": "^2.2.0",
+    "@jsr/std__fs": "^1.0.21",
+    "@jsr/std__path": "^1.1.4",
     "@jsr/strootje__better-kysely": "^0.4.0",
     "@sentry/solid": "^10.32.1",
     "@sentry/vite-plugin": "^4.6.1",
