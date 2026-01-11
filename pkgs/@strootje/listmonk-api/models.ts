@@ -7,12 +7,6 @@ const m = {
       v.transform(({ data }) => data),
     );
   },
-  response2: <TEntries extends v.ObjectEntries>(data: v.ObjectSchema<TEntries, undefined>) => {
-    return v.pipe(
-      v.object({ data }),
-      // v.transform(({ data }) => data),
-    );
-  },
 
   paged: <TEntries extends v.ObjectEntries>(result: v.ObjectSchema<TEntries, undefined>) => {
     return v.object({
@@ -98,6 +92,18 @@ export const s = {
   },
 
   subscribers: {
+    find: {
+      req: v.pipe(
+        v.object({
+          query: v.string(),
+        }),
+        v.transform(({ query }) => ({
+          query: new URLSearchParams({ query }).toString(),
+        })),
+      ),
+      res: m.response(m.paged(subscriber)),
+    },
+
     get: {
       req: v.object({}),
       res: m.response(subscriber),

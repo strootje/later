@@ -26,7 +26,15 @@ const getSubscriberMiddleware = createMiddleware().middleware([
     });
   }
 
-  const subscriber = await listmonk().subscribers.new({
+  const { results: foundSubscribers } = await listmonk().subscribers.find({
+    query: `subscribers.email = '${user.email}'`,
+  });
+
+  if (foundSubscribers.length > 1) {
+    throw "[src/data.functions/mailing-list] ::: found more than 0 or 1 existing subscribers with email";
+  }
+
+  const subscriber = foundSubscribers[0] ?? await listmonk().subscribers.new({
     email: user.email,
     name: user.name,
   });

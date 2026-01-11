@@ -31,6 +31,12 @@ export const createListmonkClient = map(s.listmonk, ({ authorization, baseUri })
         });
       }),
     }), {
+      find: reqres(s.subscribers.find, ({ query }) => {
+        return fetch(`${baseUri}/api/subscribers?${query}`, {
+          headers,
+        });
+      }),
+
       new: reqres(s.subscribers.new, (body) => {
         return fetch(`${baseUri}/api/subscribers`, {
           body: JSON.stringify(body),
