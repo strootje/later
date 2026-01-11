@@ -5,15 +5,10 @@ import { env } from "./env.service.ts";
 import { getUserMiddleware, updateUser } from "./user.service.ts";
 
 const listmonk = createServerOnlyFn(() => {
-  const LISTMONK_API_TOKEN = env().listmonk.token();
-  if (!LISTMONK_API_TOKEN) {
-    throw `[src/data.functions/mailing-list.service] ::: missing LISTMONK_API_TOKEN`;
-  }
-
   return createListmonkClient({
     baseUri: "https://lists.strooware.nl",
-    login: env().listmonk.login(),
-    token: LISTMONK_API_TOKEN,
+    login: env().listmonk.login,
+    token: env().listmonk.token,
   });
 });
 

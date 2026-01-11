@@ -6,14 +6,9 @@ import { getUserMiddleware } from "./user.service.ts";
 
 const appTag = "app-later";
 const fider = createServerOnlyFn(() => {
-  const FIDER_API_TOKEN = env().fider.token();
-  if (!FIDER_API_TOKEN) {
-    throw `[src/data.functions/feedback.service] ::: missing FIDER_API_TOKEN`;
-  }
-
   return createFiderClient({
     baseUri: "https://feedback.strooware.nl",
-    token: FIDER_API_TOKEN,
+    token: env().fider.token,
   });
 });
 
