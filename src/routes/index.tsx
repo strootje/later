@@ -17,6 +17,7 @@ import { DayCard } from "../comps.ui.cards/day.card.tsx";
 import { TodoItemCard } from "../comps.ui.cards/todo-item.card.tsx";
 import { Page, Section } from "../comps.ui.shell/layout.tsx";
 import { Button } from "../comps.ui/button.tsx";
+import { Icon } from "../comps.ui/icon.tsx";
 import { todoItemCollection } from "../data.collections/todo-item.collection.ts";
 
 export const Route = createFileRoute("/")({
@@ -68,7 +69,7 @@ export const Route = createFileRoute("/")({
         <Section>
           <form class="mt-1 flex justify-center gap-2">
             <Button class="b-1 b-stone-500 rounded bg-white p-2" onclick={() => setDueAt(subDays(1, dueAt()))}>
-              <i class="i-solar:alt-arrow-left-bold" />
+              <Icon.Solar class="i-solar:alt-arrow-left-bold" />
             </Button>
 
             <switchDate.Field name="date">
@@ -78,17 +79,20 @@ export const Route = createFileRoute("/")({
                   class="b-1 b-stone-500 inline-flex min-w-1/3 items-center justify-center rounded bg-white px-2 py-1"
                   onclick={() => setDueAt(new Date())}
                 >
-                  {intlFormatDistanceWithOptions(
-                    { unit: "day" },
-                    formatISOWithOptions({ representation: "date" }, new Date()),
-                    formatISOWithOptions({ representation: "date" }, field().state.value),
-                  )}
+                  <Icon.Solar class="i-solar:calendar-date-bold-duotone" />
+                  <span>
+                    {intlFormatDistanceWithOptions(
+                      { unit: "day" },
+                      formatISOWithOptions({ representation: "date" }, new Date()),
+                      formatISOWithOptions({ representation: "date" }, field().state.value),
+                    )}
+                  </span>
                 </button>
               )}
             </switchDate.Field>
 
             <Button class="b-1 b-stone-500 rounded bg-white p-2" onclick={() => setDueAt(addDays(1, dueAt()))}>
-              <i class="i-solar:alt-arrow-right-bold" />
+              <Icon.Solar class="i-solar:alt-arrow-right-bold" />
             </Button>
           </form>
 
