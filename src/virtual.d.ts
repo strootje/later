@@ -9,9 +9,10 @@ interface ImportMetaEnv {
   readonly DEV: boolean;
   readonly SSR: boolean;
 
-  readonly LATER_FIDER_API_TOKEN: string;
-  readonly LATER_LISTMONK_API_TOKEN: string;
-  readonly LATER_LISTMONK_API_LOGIN: string;
+  readonly VITE_FIDER_API_TOKEN?: string;
+  readonly VITE_LISTMONK_API_TOKEN?: string;
+  readonly VITE_LISTMONK_API_LOGIN?: string;
+  readonly VITE_DATABASE_PATH?: string;
 }
 
 interface ImportMeta {

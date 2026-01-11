@@ -4,10 +4,14 @@ import * as v from "valibot";
 import { getUserMiddleware, updateUser } from "./user.service.ts";
 
 const listmonk = createServerOnlyFn(() => {
+  if (!import.meta.env.VITE_LISTMONK_API_TOKEN) {
+    throw `[src/data.functions/mailing-list.service] ::: missing VITE_LISTMONK_API_TOKEN`;
+  }
+
   return createListmonkClient({
     baseUri: "https://lists.strooware.nl",
-    token: import.meta.env.LATER_LISTMONK_API_TOKEN,
-    login: import.meta.env.LATER_LISTMONK_API_LOGIN,
+    login: import.meta.env.VITE_LISTMONK_API_LOGIN ?? "later",
+    token: import.meta.env.VITE_LISTMONK_API_TOKEN,
   });
 });
 

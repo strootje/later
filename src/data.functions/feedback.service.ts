@@ -5,9 +5,13 @@ import { getUserMiddleware } from "./user.service.ts";
 
 const appTag = "app-later";
 const fider = createServerOnlyFn(() => {
+  if (!import.meta.env.VITE_FIDER_API_TOKEN) {
+    throw `[src/data.functions/feedback.service] ::: missing VITE_FIDER_API_TOKEN`;
+  }
+
   return createFiderClient({
     baseUri: "https://feedback.strooware.nl",
-    token: import.meta.env.LATER_FIDER_API_TOKEN,
+    token: import.meta.env.VITE_FIDER_API_TOKEN,
   });
 });
 

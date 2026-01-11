@@ -4,8 +4,6 @@ import { adminClient, inferAdditionalFields, magicLinkClient } from "better-auth
 import { createAuthClient } from "better-auth/solid";
 
 export const clientAuth = createAuthClient({
-  baseURL: `${"https://later.strooware.nl"}`,
-
   plugins: [
     adminClient(),
     inferAdditionalFields<typeof serverAuth>(),

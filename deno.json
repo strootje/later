@@ -15,7 +15,10 @@
     "jsx": "react-jsx",
     "jsxImportSource": "solid-js",
     "module": "preserve",
-    "lib": ["deno.ns", "dom"]
+    "lib": ["deno.ns", "dom"],
+    "types": [
+      "./src/virtual.d.ts"
+    ]
   },
 
   "fmt": {
