@@ -1,17 +1,19 @@
 import { createFiderClient } from "@strootje/fider-api";
 import { createMiddleware, createServerFn, createServerOnlyFn } from "@tanstack/solid-start";
 import * as v from "valibot";
+import { env } from "./env.service.ts";
 import { getUserMiddleware } from "./user.service.ts";
 
 const appTag = "app-later";
 const fider = createServerOnlyFn(() => {
-  if (!import.meta.env.VITE_FIDER_API_TOKEN) {
-    throw `[src/data.functions/feedback.service] ::: missing VITE_FIDER_API_TOKEN`;
+  const FIDER_API_TOKEN = env().fider.token();
+  if (!FIDER_API_TOKEN) {
+    throw `[src/data.functions/feedback.service] ::: missing FIDER_API_TOKEN`;
   }
 
   return createFiderClient({
     baseUri: "https://feedback.strooware.nl",
-    token: import.meta.env.VITE_FIDER_API_TOKEN,
+    token: FIDER_API_TOKEN,
   });
 });
 

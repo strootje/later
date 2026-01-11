@@ -4,14 +4,14 @@ import { ensureDirSync } from "@jsr/std__fs";
 import { dirname } from "@jsr/std__path";
 import { makeDatabase } from "@jsr/strootje__better-kysely";
 import type { Dialect } from "kysely";
+import { env } from "../../../src/data.functions/env.service.ts";
 import { server_m001_initial } from "./migrations/server-001-initial.ts";
 import { server_m002_add_subscriber_id } from "./migrations/server-002-add-subscriber-id.ts";
 import type { ServerDatabase } from "./models/server.models.ts";
 
 let dialect: DenoSqlite3Dialect;
 const getDialect = () => {
-  console.log("testing", import.meta.env);
-  const dbPath = `${import.meta.env.VITE_DATABASE_PATH ?? "."}/later.server.db`;
+  const dbPath = `${env().databasePath()}/later.server.db`;
   console.log(`[@scope/database/server] ::: loading '${dbPath}'`);
   ensureDirSync(dirname(dbPath));
 

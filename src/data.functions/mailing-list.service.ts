@@ -1,17 +1,19 @@
 import { createListmonkClient } from "@strootje/listmonk-api";
 import { createMiddleware, createServerFn, createServerOnlyFn } from "@tanstack/solid-start";
 import * as v from "valibot";
+import { env } from "./env.service.ts";
 import { getUserMiddleware, updateUser } from "./user.service.ts";
 
 const listmonk = createServerOnlyFn(() => {
-  if (!import.meta.env.VITE_LISTMONK_API_TOKEN) {
-    throw `[src/data.functions/mailing-list.service] ::: missing VITE_LISTMONK_API_TOKEN`;
+  const LISTMONK_API_TOKEN = env().listmonk.token();
+  if (!LISTMONK_API_TOKEN) {
+    throw `[src/data.functions/mailing-list.service] ::: missing LISTMONK_API_TOKEN`;
   }
 
   return createListmonkClient({
     baseUri: "https://lists.strooware.nl",
-    login: import.meta.env.VITE_LISTMONK_API_LOGIN ?? "later",
-    token: import.meta.env.VITE_LISTMONK_API_TOKEN,
+    login: env().listmonk.login(),
+    token: LISTMONK_API_TOKEN,
   });
 });
 
