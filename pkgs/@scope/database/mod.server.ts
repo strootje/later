@@ -10,6 +10,7 @@ import type { ServerDatabase } from "./models/server.models.ts";
 
 let dialect: DenoSqlite3Dialect;
 const getDialect = () => {
+  console.log("testing", import.meta.env);
   const dbPath = `${import.meta.env.VITE_DATABASE_PATH ?? "."}/later.server.db`;
   console.log(`[@scope/database/server] ::: loading '${dbPath}'`);
   ensureDirSync(dirname(dbPath));
