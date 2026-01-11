@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/solid-router";
+import { Icon } from "../comps.ui/icon.tsx";
 
 export const AppBar = () => {
   return (
@@ -8,13 +9,13 @@ export const AppBar = () => {
         <ul class="flex justify-around py-1 text-2xl">
           <li>
             <Link class="inline-block px-2 py-1" activeProps={{ class: "text-brand-900" }} to="/">
-              <i class="i-solar:check-square-bold-duotone inline-block p-2" />
+              <Icon.Solar class="i-solar:check-square-bold-duotone p-2" />
             </Link>
           </li>
 
           <li>
             <Link class="inline-block px-2 py-1" activeProps={{ class: "text-brand-900" }} to="/settings">
-              <i class="i-solar:settings-minimalistic-bold-duotone inline-block p-2" />
+              <Icon.Solar class="i-solar:settings-minimalistic-bold-duotone p-2" />
             </Link>
           </li>
         </ul>

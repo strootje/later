@@ -4,6 +4,7 @@ import { Show } from "solid-js";
 import { UserCard } from "../comps.ui.cards/user.card.tsx";
 import { Page, Section } from "../comps.ui.shell/layout.tsx";
 import { Menu } from "../comps.ui.shell/menu.tsx";
+import { Icon } from "../comps.ui/icon.tsx";
 import { findUser } from "../data.functions/user.service.ts";
 
 export const Route = createFileRoute("/settings/")({
@@ -32,19 +33,19 @@ export const Route = createFileRoute("/settings/")({
                   <UserCard user={user()} />
 
                   <Link to="/settings/communication">
-                    <i class="i-solar:mailbox-bold-duotone" />
+                    <Icon.Solar class="i-solar:mailbox-bold-duotone" />
                     <span class="grow">Communication</span>
-                    <i class="i-solar:alt-arrow-right-bold-duotone" />
+                    <Icon.Solar class="i-solar:alt-arrow-right-bold-duotone" />
                   </Link>
 
                   <Link to="/settings/feedback">
-                    <i class="i-solar:phone-calling-rounded-bold-duotone" />
+                    <Icon.Solar class="i-solar:phone-calling-rounded-bold-duotone" />
                     <span class="grow">Feedback</span>
-                    <i class="i-solar:alt-arrow-right-bold-duotone" />
+                    <Icon.Solar class="i-solar:alt-arrow-right-bold-duotone" />
                   </Link>
 
                   <button type="button" onclick={handleLogout}>
-                    <i class="i-solar:logout-2-bold-duotone" />
+                    <Icon.Solar class="i-solar:logout-2-bold-duotone" />
                     <span>Logout</span>
                   </button>
                 </Menu>
@@ -61,9 +62,9 @@ export const Route = createFileRoute("/settings/")({
 
             <Menu>
               <Link to="/settings/admin/users">
-                <i class="i-solar:users-group-rounded-bold-duotone" />
+                <Icon.Solar class="i-solar:users-group-rounded-bold-duotone" />
                 <span class="grow">Users</span>
-                <i class="i-solar:alt-arrow-right-bold-duotone" />
+                <Icon.Solar class="i-solar:alt-arrow-right-bold-duotone" />
               </Link>
             </Menu>
           </Section>

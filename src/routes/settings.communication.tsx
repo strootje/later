@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/solid-router";
 import { Index } from "solid-js";
 import { Page, Section } from "../comps.ui.shell/layout.tsx";
 import { Menu } from "../comps.ui.shell/menu.tsx";
+import { Icon } from "../comps.ui/icon.tsx";
 import { getMailingLists, getSubscriber, updateSubscriber } from "../data.functions/mailing-list.service.ts";
 
 export const Route = createFileRoute("/settings/communication")({
@@ -18,7 +19,7 @@ export const Route = createFileRoute("/settings/communication")({
         <Page.Header>
           <h1 class="flex items-center gap-1">
             <Link to="/settings">
-              <i class="i-solar:alt-arrow-left-bold" />
+              <Icon.Solar class="i-solar:alt-arrow-left-bold" />
             </Link>
             <span>Communication</span>
           </h1>

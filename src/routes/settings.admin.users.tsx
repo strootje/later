@@ -4,6 +4,7 @@ import { Index } from "solid-js";
 import { UserCard } from "../comps.ui.cards/user.card.tsx";
 import { Page, Section } from "../comps.ui.shell/layout.tsx";
 import { Menu } from "../comps.ui.shell/menu.tsx";
+import { Icon } from "../comps.ui/icon.tsx";
 import { userCollection } from "../data.collections/user.collection.ts";
 
 export const Route = createFileRoute("/settings/admin/users")({
@@ -15,7 +16,7 @@ export const Route = createFileRoute("/settings/admin/users")({
         <Page.Header>
           <h1 class="flex items-center gap-1">
             <Link to="/settings">
-              <i class="i-solar:alt-arrow-left-bold" />
+              <Icon.Solar class="i-solar:alt-arrow-left-bold" />
             </Link>
             <span>Users</span>
           </h1>

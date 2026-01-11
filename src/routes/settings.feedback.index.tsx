@@ -4,6 +4,7 @@ import { Index } from "solid-js";
 import { AddFeedbackModal } from "../comps.modals/modal.add-feedback.tsx";
 import { Page, Section } from "../comps.ui.shell/layout.tsx";
 import { Menu } from "../comps.ui.shell/menu.tsx";
+import { Icon } from "../comps.ui/icon.tsx";
 import { feedbackPostCollection } from "../data.collections/feedback-post.collection.ts";
 
 export const Route = createFileRoute("/settings/feedback/")({
@@ -25,7 +26,7 @@ export const Route = createFileRoute("/settings/feedback/")({
         <Page.Header>
           <h1 class="flex items-center gap-1">
             <Link to="/settings">
-              <i class="i-solar:alt-arrow-left-bold" />
+              <Icon.Solar class="i-solar:alt-arrow-left-bold" />
             </Link>
             <span>Feedback</span>
           </h1>
