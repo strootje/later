@@ -1,7 +1,7 @@
 import { Database as Sqlite } from "@jsr/db__sqlite";
 import { DenoSqlite3Dialect } from "@jsr/soapbox__kysely-deno-sqlite";
 import { ensureDirSync } from "@jsr/std__fs";
-import { dirname, join } from "@jsr/std__path";
+import { dirname } from "@jsr/std__path";
 import { makeDatabase } from "@jsr/strootje__better-kysely";
 import type { Dialect } from "kysely";
 import { server_m001_initial } from "./migrations/server-001-initial.ts";
@@ -10,7 +10,7 @@ import type { ServerDatabase } from "./models/server.models.ts";
 
 let dialect: DenoSqlite3Dialect;
 const getDialect = () => {
-  const dbPath = join(import.meta.env.VITE_DATABASE_PATH ?? ".", "later.server.db");
+  const dbPath = `${import.meta.env.VITE_DATABASE_PATH ?? "."}/later.server.db`;
   console.log(`[@scope/database/server] ::: loading '${dbPath}'`);
   ensureDirSync(dirname(dbPath));
 
