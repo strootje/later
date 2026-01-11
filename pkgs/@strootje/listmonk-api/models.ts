@@ -6,13 +6,16 @@ const m = {
     return v.pipe(
       v.union([
         v.object({
-          error: v.object({ message: v.string() }),
+          code: v.number(),
+          message: v.string(),
+          error: v.literal(true),
+          description: v.string(),
         }),
         v.object({ data }),
       ]),
       v.transform((dataOrError) => {
         if ("error" in dataOrError) {
-          return err(dataOrError.error.message);
+          return err(dataOrError);
         }
 
         return ok(dataOrError.data);
