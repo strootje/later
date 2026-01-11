@@ -1,10 +1,22 @@
+import { err, ok } from "neverthrow";
 import * as v from "valibot";
 
 const m = {
   response: <TEntries extends v.ObjectEntries>(data: v.ObjectSchema<TEntries, undefined>) => {
     return v.pipe(
-      v.object({ data }),
-      v.transform(({ data }) => data),
+      v.union([
+        v.object({
+          error: v.object({ message: v.string() }),
+        }),
+        v.object({ data }),
+      ]),
+      v.transform((dataOrError) => {
+        if ("error" in dataOrError) {
+          return err(dataOrError.error.message);
+        }
+
+        return ok(dataOrError.data);
+      }),
     );
   },
 

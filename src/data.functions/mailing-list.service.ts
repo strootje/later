@@ -19,25 +19,36 @@ const getSubscriberMiddleware = createMiddleware().middleware([
   next,
 }) => {
   if (user.subscriberId) {
+    const subcriberResult = await listmonk().subscribers(user.subscriberId).get({});
+
+    if (!subcriberResult.isOk()) {
+      throw subcriberResult.error;
+    }
+
     return await next({
       context: {
-        subscriber: await listmonk().subscribers(user.subscriberId).get({}),
+        subscriber: subcriberResult.value,
       },
     });
   }
 
-  const { results: foundSubscribers } = await listmonk().subscribers.find({
+  const foundSubscribersResult = await listmonk().subscribers.find({
     query: `subscribers.email = '${user.email}'`,
   });
 
-  if (foundSubscribers.length > 1) {
-    throw "[src/data.functions/mailing-list] ::: found more than 0 or 1 existing subscribers with email";
-  }
+  const foundSubscribers = foundSubscribersResult.isOk() ? foundSubscribersResult.value.results : [];
+  const subscriber = foundSubscribers[0] ?? await (async () => {
+    const newSubscriberResult = await listmonk().subscribers.new({
+      email: user.email,
+      name: user.name,
+    });
 
-  const subscriber = foundSubscribers[0] ?? await listmonk().subscribers.new({
-    email: user.email,
-    name: user.name,
-  });
+    if (!newSubscriberResult.isOk()) {
+      throw newSubscriberResult.error;
+    }
+
+    return newSubscriberResult.value;
+  })();
 
   await updateUser({
     data: {
@@ -63,23 +74,33 @@ export const updateSubscriber = createServerFn().middleware([
 ]).inputValidator(v.object({
   listId: v.number(),
   subscribe: v.boolean(),
-})).handler(({
+})).handler(async ({
   context: { subscriber },
   data: { listId, subscribe },
 }) => {
-  return listmonk().subscribers(subscriber.id).update({
+  const subscriberResult = await listmonk().subscribers(subscriber.id).update({
     ...subscriber,
     lists: [
       ...subscriber.lists.filter((p) => subscribe || p.id !== listId).map((p) => p.id),
       ...subscribe ? [listId] : [],
     ],
   });
+
+  if (!subscriberResult.isOk()) {
+    throw subscriberResult.error;
+  }
+
+  return subscriberResult.value;
 });
 
 export const getMailingLists = createServerFn().handler(async () => {
-  const lists = await listmonk().lists.get({
+  const listsResult = await listmonk().lists.get({
     tags: ["app-later"],
   });
 
-  return lists.results;
+  if (!listsResult.isOk()) {
+    throw listsResult.error;
+  }
+
+  return listsResult.value.results;
 });

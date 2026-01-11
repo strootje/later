@@ -31,10 +31,6 @@ export const reqres = <TIn extends SS, TOut extends SS>(
   return async (input: SS.InferInput<TIn>): Promise<SS.InferOutput<TOut>> => {
     const result = await func(validateSync(schema.req, input));
 
-    if (!result.ok) {
-      console.log(`[@strootje/more/api] ::: [ERROR]: ${result}`);
-    }
-
     return validateSync(schema.res, await result.json());
   };
 };
