@@ -9,10 +9,9 @@ interface ImportMetaEnv {
   readonly DEV: boolean;
   readonly SSR: boolean;
 
-  readonly SENTRY_TOKEN: string;
-  readonly FIDER_API_TOKEN: string;
-  readonly LISTMONK_API_TOKEN: string;
-  readonly LISTMONK_API_LOGIN: string;
+  readonly LATER_FIDER_API_TOKEN: string;
+  readonly LATER_LISTMONK_API_TOKEN: string;
+  readonly LATER_LISTMONK_API_LOGIN: string;
 }
 
 interface ImportMeta {

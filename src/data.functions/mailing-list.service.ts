@@ -6,8 +6,8 @@ import { getUserMiddleware, updateUser } from "./user.service.ts";
 const listmonk = createServerOnlyFn(() => {
   return createListmonkClient({
     baseUri: "https://lists.strooware.nl",
-    token: import.meta.env.LISTMONK_API_TOKEN,
-    login: import.meta.env.LISTMONK_API_LOGIN,
+    token: import.meta.env.LATER_LISTMONK_API_TOKEN,
+    login: import.meta.env.LATER_LISTMONK_API_LOGIN,
   });
 });
 

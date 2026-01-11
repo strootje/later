@@ -7,7 +7,7 @@ const appTag = "app-later";
 const fider = createServerOnlyFn(() => {
   return createFiderClient({
     baseUri: "https://feedback.strooware.nl",
-    token: import.meta.env.FIDER_API_TOKEN,
+    token: import.meta.env.LATER_FIDER_API_TOKEN,
   });
 });
 
