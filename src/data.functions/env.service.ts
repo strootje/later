@@ -3,7 +3,7 @@ import { createServerOnlyFn } from "@tanstack/solid-start";
 const load = <T = string>(key: string, defval?: T) => {
   const val = Deno.env.get(key);
 
-  if (!val && !defval) {
+  if (!val && !defval && val !== defval) {
     throw `missing env '${key}'`;
   }
 
@@ -15,6 +15,9 @@ const load = <T = string>(key: string, defval?: T) => {
 };
 
 export const env = createServerOnlyFn(() => ({
+  database: {
+    path: load("DATABASE_PATH", "."),
+  },
   fider: {
     token: load("FIDER_API_TOKEN"),
   },
@@ -22,7 +25,8 @@ export const env = createServerOnlyFn(() => ({
     login: load("LISTMONK_API_LOGIN", "later"),
     token: load("LISTMONK_API_TOKEN"),
   },
-  database: {
-    path: load("DATABASE_PATH", "."),
+  smtp: {
+    host: load<string | undefined>("SMTP_HOST", undefined),
+    port: load("SMTP_PORT", 2525),
   },
 }));

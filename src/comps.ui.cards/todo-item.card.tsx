@@ -2,6 +2,7 @@ import type { clientModels } from "@scope/database/client";
 import { cva, cx, type VariantProps } from "class-variance-authority";
 import { addDays, formatISOWithOptions } from "date-fns/fp";
 import { type ComponentProps, splitProps } from "solid-js";
+import { Icon } from "../comps.ui/icon.tsx";
 import { Swiper } from "../comps.ui/swiper.tsx";
 import { todoItemCollection } from "../data.collections/todo-item.collection.ts";
 
@@ -25,7 +26,7 @@ export const TodoItemCard = (props: TodoItemCardProps) => {
       actions={{
         left: [
           {
-            comp: <i class="i-solar:check-square-bold-duotone" />,
+            comp: <Icon.Solar class="i-solar:check-square-bold-duotone" />,
             action: async () => {
               todoItemCollection.update(loProps.todoItem.id, (p) => {
                 if (p.completedAt) {
@@ -39,7 +40,7 @@ export const TodoItemCard = (props: TodoItemCardProps) => {
         ],
         right: [
           {
-            comp: <i class="i-solar:alarm-bold-duotone" />,
+            comp: <Icon.Solar class="i-solar:alarm-bold-duotone" />,
             action: async () => {
               todoItemCollection.update(loProps.todoItem.id, (p) => {
                 p.dueAt = formatISOWithOptions({ representation: "date" }, addDays(3, p.dueAt));

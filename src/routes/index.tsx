@@ -69,17 +69,16 @@ export const Route = createFileRoute("/")({
         <Section>
           <form class="mt-1 flex justify-center gap-2">
             <Button class="b-1 b-stone-500 rounded bg-white p-2" onclick={() => setDueAt(subDays(1, dueAt()))}>
-              <Icon.Solar class="i-solar:alt-arrow-left-bold" />
+              <Icon.Solar class="i-solar:alt-arrow-left-bold text-xl" />
             </Button>
 
             <switchDate.Field name="date">
               {(field) => (
-                <button
-                  type="button"
-                  class="b-1 b-stone-500 inline-flex min-w-1/3 items-center justify-center rounded bg-white px-2 py-1"
+                <Button
+                  class="b-1 b-stone-500 flex inline-flex min-w-1/3 items-center justify-center gap-2 rounded bg-white px-2 py-1"
                   onclick={() => setDueAt(new Date())}
                 >
-                  <Icon.Solar class="i-solar:calendar-date-bold-duotone" />
+                  <Icon.Solar class="i-solar:calendar-date-bold-duotone p-2 text-xl" />
                   <span>
                     {intlFormatDistanceWithOptions(
                       { unit: "day" },
@@ -87,12 +86,12 @@ export const Route = createFileRoute("/")({
                       formatISOWithOptions({ representation: "date" }, field().state.value),
                     )}
                   </span>
-                </button>
+                </Button>
               )}
             </switchDate.Field>
 
             <Button class="b-1 b-stone-500 rounded bg-white p-2" onclick={() => setDueAt(addDays(1, dueAt()))}>
-              <Icon.Solar class="i-solar:alt-arrow-right-bold" />
+              <Icon.Solar class="i-solar:alt-arrow-right-bold text-xl" />
             </Button>
           </form>
 
