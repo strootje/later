@@ -17,6 +17,8 @@ FROM docker.io/denoland/deno:alpine-${DENO_VERSION}
 WORKDIR /app
 COPY --from=build /build/.output .
 
+ENV LISTMONK_API_LOGIN=later
+
 EXPOSE 3000
 VOLUME /data
 CMD ["deno", "run", "--allow-all", "server/index.mjs"]
