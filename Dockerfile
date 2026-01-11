@@ -1,6 +1,4 @@
-
-
-ARG DENO_VERSION=2.5.6
+ARG DENO_VERSION=2.6.4
 FROM docker.io/denoland/deno:alpine-${DENO_VERSION} AS deps
 
 WORKDIR /build
@@ -17,8 +15,6 @@ FROM docker.io/denoland/deno:alpine-${DENO_VERSION}
 WORKDIR /app
 COPY --from=build /build/.output .
 
-
 EXPOSE 3000
 VOLUME /data
-ENV VITE_DATABASE_PATH=/data
 CMD ["deno", "run", "--allow-all", "server/index.mjs"]
