@@ -27,6 +27,6 @@ export const env = createServerOnlyFn(() => ({
   },
   smtp: {
     host: load<string | undefined>("SMTP_HOST", undefined),
-    port: load("SMTP_PORT", 2525),
+    port: load("SMTP_PORT", 1025),
   },
 }));
