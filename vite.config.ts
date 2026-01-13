@@ -1,18 +1,19 @@
-import deno from "@deno/vite-plugin";
+import pluginDeno from "@deno/vite-plugin";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { nitroV2Plugin } from "@tanstack/nitro-v2-vite-plugin";
 import { tanstackStart } from "@tanstack/solid-start/plugin/vite";
-import sqlocal from "sqlocal/vite";
-import uno from "unocss/vite";
+import pluginSqlocal from "sqlocal/vite";
+import pluginUno from "unocss/vite";
 import { defineConfig, type Plugin } from "vite";
-import solid from "vite-plugin-solid";
+import pluginSolid from "vite-plugin-solid";
+import { pluginPwa } from "./pwa.config.ts";
 
 export default defineConfig({
   build: { sourcemap: true },
   server: { port: 3000 },
 
   plugins: [
-    deno(),
+    pluginDeno(),
     tanstackStart({
       client: {
         entry: "entry-client.tsx",
@@ -30,9 +31,10 @@ export default defineConfig({
       preset: "deno-server",
       compatibilityDate: "2025-11-29",
     }),
-    solid({ ssr: true }),
-    sqlocal() as Plugin,
-    uno(),
+    pluginSolid({ ssr: true }),
+    pluginSqlocal() as Plugin,
+    pluginUno(),
+    pluginPwa(),
     sentryVitePlugin({
       authToken: Deno.env.get("SENTRY_TOKEN"),
       url: "https://bugs.strooware.nl",

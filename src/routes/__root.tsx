@@ -1,8 +1,18 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/solid-router";
-import "@unocss/reset/tailwind.css";
 import { HydrationScript } from "solid-js/web";
-import "virtual:uno.css";
+import { registerSW } from "virtual:pwa-register";
 import { AppBar } from "../comps.ui.shell/app-bar.tsx";
+
+import "@unocss/reset/tailwind.css";
+import "virtual:uno.css";
+
+registerSW({
+  immediate: true,
+
+  onRegisterError(error) {
+    console.error("onRegisterError", error);
+  },
+});
 
 export const Route = createRootRoute({
   head: () => ({

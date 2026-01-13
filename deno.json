@@ -17,7 +17,9 @@
     "module": "preserve",
     "lib": ["deno.ns", "dom"],
     "types": [
-      "./src/virtual.d.ts"
+      "vite/client",
+      "vite-plugin-pwa/client",
+      "vite-plugin-pwa/solid"
     ]
   },
 
