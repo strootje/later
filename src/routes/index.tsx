@@ -1,6 +1,13 @@
-import { Form } from "@strootje/more/form";
+import { DayCard } from "#/components/card-day.tsx";
+import { TodoItemCard } from "#/components/card-todo-item.tsx";
+import { Button } from "#/components/common-button.tsx";
+import { Icon } from "#/components/common-icon.tsx";
+import { useAppForm } from "#/components/hooks-form.ts";
+import { Page, Section } from "#/components/shell-app-layout.tsx";
+import { TodoItemCollection } from "#/functions/todo-item.collection.ts";
 import { eq, useLiveQuery } from "@tanstack/solid-db";
 import { createFileRoute } from "@tanstack/solid-router";
+import { createClientOnlyFn } from "@tanstack/solid-start";
 import {
   addDays,
   eachDayOfInterval,
@@ -12,23 +19,19 @@ import {
 } from "date-fns/fp";
 import { createSignal, Index } from "solid-js";
 import * as v from "valibot";
-import { useAppForm } from "../comps.form/hooks.ts";
-import { DayCard } from "../comps.ui.cards/day.card.tsx";
-import { TodoItemCard } from "../comps.ui.cards/todo-item.card.tsx";
-import { Page, Section } from "../comps.ui.shell/layout.tsx";
-import { Button } from "../comps.ui/button.tsx";
-import { Icon } from "../comps.ui/icon.tsx";
-import { todoItemCollection } from "../data.collections/todo-item.collection.ts";
 
 export const Route = createFileRoute("/")({
   component: () => {
     const [dueAt, setDueAt] = createSignal(new Date());
     const firstDayOfWeek = () => startOfISOWeek(dueAt());
 
-    const filteredTodos = useLiveQuery((p) =>
-      p.from({ todo: todoItemCollection })
-        .where(({ todo }) => eq(todo.dueAt, formatISOWithOptions({ representation: "date" }, dueAt())))
-    );
+    const filteredTodos = useLiveQuery((query) => {
+      return query
+        .from({ todo: TodoItemCollection })
+        .where(({ todo }) => {
+          return eq(todo.dueAt, formatISOWithOptions({ representation: "date" }, dueAt()));
+        });
+    });
 
     const switchDate = useAppForm(() => ({
       defaultValues: {
@@ -53,15 +56,15 @@ export const Route = createFileRoute("/")({
         }),
       },
 
-      onSubmit({ formApi, value }) {
-        todoItemCollection.insert({
+      onSubmit: createClientOnlyFn(({ formApi, value }) => {
+        TodoItemCollection.insert({
           id: crypto.randomUUID(),
           dueAt: formatISOWithOptions({ representation: "date" }, dueAt()),
           ...value,
         });
 
         formApi.reset();
-      },
+      }),
     }));
 
     return (
@@ -110,13 +113,21 @@ export const Route = createFileRoute("/")({
         </Section>
 
         <Section>
-          <Index each={filteredTodos.data}>
+          <Index each={filteredTodos()}>
             {(item) => <TodoItemCard todoItem={item()} />}
           </Index>
 
-          <Form for={addTodo}>
-            <addTodo.AppField name="title">{(field) => <field.TextInput />}</addTodo.AppField>
-          </Form>
+          <form
+            onsubmit={async (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              await addTodo.handleSubmit();
+            }}
+          >
+            <addTodo.AppForm>
+              <addTodo.AppField name="title">{(field) => <field.TextInput />}</addTodo.AppField>
+            </addTodo.AppForm>
+          </form>
         </Section>
       </Page>
     );

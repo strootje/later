@@ -4,23 +4,29 @@
     "build": "vite build"
   },
 
-  "allowScripts": [
-    "npm:@parcel/watcher",
-    "npm:@sentry/cli"
-  ],
-
-  "nodeModulesDir": "auto",
-  "workspace": ["pkgs/**"],
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "solid-js",
     "module": "preserve",
-    "lib": ["deno.ns", "dom"],
+
+    "lib": [
+      "deno.ns",
+      "dom"
+    ],
+
     "types": [
       "vite/client",
       "vite-plugin-pwa/client",
       "vite-plugin-pwa/solid"
     ]
+  },
+
+  "workspace": [
+    "pkgs/**"
+  ],
+
+  "imports": {
+    "#/": "./src/"
   },
 
   "fmt": {
@@ -29,5 +35,9 @@
 
   "lint": {
     "plugins": ["jsr:@ryu/deno-lint-plugin-tailwindcss@0.2.0"]
+  },
+  "allowScripts": {
+    "allow": ["npm:@parcel/watcher@2.5.6", "npm:@sentry/cli@2.58.5"],
+    "deny": ["npm:@prisma/engines@7.4.2", "npm:esbuild@0.27.2", "npm:prisma@7.4.2"]
   }
 }

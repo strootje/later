@@ -1,0 +1,10 @@
+{
+  "name": "@strootje/more",
+  "exports": {
+    "./api": "./mod.api.ts",
+    "./form": "./mod.form.tsx",
+    "./query": "./mod.query.ts",
+    "./sentry": "./mod.sentry.tsx",
+    "./tw": "./mod.tw.ts"
+  }
+}

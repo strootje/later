@@ -15,7 +15,7 @@ FROM docker.io/denoland/deno:alpine-${DENO_VERSION}
 WORKDIR /app
 COPY --from=build /build/.output .
 
-EXPOSE 3000
+EXPOSE 5173
 VOLUME /data
 env DATABASE_PATH=/data
 

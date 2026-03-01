@@ -1,15 +1,17 @@
+import { UserCard } from "#/components/card-user.tsx";
+import { Icon } from "#/components/common-icon.tsx";
+import { Page, Section } from "#/components/shell-app-layout.tsx";
+import { Menu } from "#/components/shell-app-menu.tsx";
+import { UserCollection } from "#/functions/user.collection.ts";
 import { useLiveQuery } from "@tanstack/solid-db";
 import { createFileRoute, Link } from "@tanstack/solid-router";
 import { Index } from "solid-js";
-import { UserCard } from "../comps.ui.cards/user.card.tsx";
-import { Page, Section } from "../comps.ui.shell/layout.tsx";
-import { Menu } from "../comps.ui.shell/menu.tsx";
-import { Icon } from "../comps.ui/icon.tsx";
-import { userCollection } from "../data.collections/user.collection.ts";
 
 export const Route = createFileRoute("/settings/admin/users")({
   component: () => {
-    const users = useLiveQuery((p) => p.from({ user: userCollection }));
+    const users = useLiveQuery((query) => {
+      return query.from({ user: UserCollection });
+    });
 
     return (
       <Page>
@@ -24,7 +26,7 @@ export const Route = createFileRoute("/settings/admin/users")({
 
         <Section>
           <Menu>
-            <Index each={users.data}>{(user) => <UserCard user={user()} />}</Index>
+            <Index each={users()}>{(user) => <UserCard user={user()} />}</Index>
           </Menu>
         </Section>
       </Page>

@@ -1,5 +1,5 @@
+import { findUser } from "#/functions/user.service.ts";
 import { createFileRoute, Outlet, redirect } from "@tanstack/solid-router";
-import { findUser } from "../data.functions/user.service.ts";
 
 export const Route = createFileRoute("/settings/admin")({
   loader: async () => {

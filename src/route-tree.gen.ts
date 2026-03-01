@@ -64,10 +64,10 @@ export interface FileRoutesByFullPath {
   "/signup": typeof SignupRoute
   "/settings/admin": typeof SettingsAdminRouteWithChildren
   "/settings/communication": typeof SettingsCommunicationRoute
-  "/settings": typeof SettingsIndexRoute
+  "/settings/": typeof SettingsIndexRoute
   "/api/auth/$": typeof ApiAuthSplatRoute
   "/settings/admin/users": typeof SettingsAdminUsersRoute
-  "/settings/feedback": typeof SettingsFeedbackIndexRoute
+  "/settings/feedback/": typeof SettingsFeedbackIndexRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
@@ -97,10 +97,10 @@ export interface FileRouteTypes {
     | "/signup"
     | "/settings/admin"
     | "/settings/communication"
-    | "/settings"
+    | "/settings/"
     | "/api/auth/$"
     | "/settings/admin/users"
-    | "/settings/feedback"
+    | "/settings/feedback/"
   fileRoutesByTo: FileRoutesByTo
   to:
     | "/"
@@ -152,7 +152,7 @@ declare module "@tanstack/solid-router" {
     "/settings/": {
       id: "/settings/"
       path: "/settings"
-      fullPath: "/settings"
+      fullPath: "/settings/"
       preLoaderRoute: typeof SettingsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -173,7 +173,7 @@ declare module "@tanstack/solid-router" {
     "/settings/feedback/": {
       id: "/settings/feedback/"
       path: "/settings/feedback"
-      fullPath: "/settings/feedback"
+      fullPath: "/settings/feedback/"
       preLoaderRoute: typeof SettingsFeedbackIndexRouteImport
       parentRoute: typeof rootRouteImport
     }

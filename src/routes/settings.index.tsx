@@ -1,11 +1,12 @@
-import { clientAuth } from "@scope/better-auth/client";
+import { UserCard } from "#/components/card-user.tsx";
+import { Icon } from "#/components/common-icon.tsx";
+import { Page, Section } from "#/components/shell-app-layout.tsx";
+import { Menu } from "#/components/shell-app-menu.tsx";
+import { findUser } from "#/functions/user.service.ts";
+import { clientAuth } from "@scope/auth/client";
 import { createFileRoute, Link } from "@tanstack/solid-router";
+import { createClientOnlyFn } from "@tanstack/solid-start";
 import { Show } from "solid-js";
-import { UserCard } from "../comps.ui.cards/user.card.tsx";
-import { Page, Section } from "../comps.ui.shell/layout.tsx";
-import { Menu } from "../comps.ui.shell/menu.tsx";
-import { Icon } from "../comps.ui/icon.tsx";
-import { findUser } from "../data.functions/user.service.ts";
 
 export const Route = createFileRoute("/settings/")({
   loader: async () => ({
@@ -15,9 +16,9 @@ export const Route = createFileRoute("/settings/")({
   component: () => {
     const data = Route.useLoaderData();
 
-    const handleLogout = async () => {
+    const handleLogout = createClientOnlyFn(async () => {
       await clientAuth.signOut();
-    };
+    });
 
     return (
       <Page>

@@ -26,7 +26,9 @@ export default defineConfig({
 
     presetWebFonts({
       provider: "bunny",
-      fonts: {},
+      fonts: {
+        sans: "Space Grotesk:300,500,700",
+      },
     }),
 
     presetIcons({

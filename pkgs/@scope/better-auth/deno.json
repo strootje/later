@@ -1,7 +1,0 @@
-{
-  "name": "@scope/better-auth",
-  "exports": {
-    "./client": "./mod.client.ts",
-    "./server": "./mod.server.ts"
-  }
-}

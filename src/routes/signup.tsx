@@ -1,9 +1,10 @@
-import { clientAuth } from "@scope/better-auth/client";
+import { useAppForm } from "#/components/hooks-form.ts";
+import { Page, Section } from "#/components/shell-app-layout.tsx";
+import { getSignupWaitinglistFlag } from "#/functions/flag.service.ts";
+import { clientAuth } from "@scope/auth/client";
 import { Form } from "@strootje/more/form";
 import { createFileRoute } from "@tanstack/solid-router";
-import { useAppForm } from "../comps.form/hooks.ts";
-import { Page, Section } from "../comps.ui.shell/layout.tsx";
-import { getSignupWaitinglistFlag } from "../data.functions/flag.service.ts";
+import { createClientOnlyFn } from "@tanstack/solid-start";
 
 export const Route = createFileRoute("/signup")({
   loader: async () => ({
@@ -16,9 +17,9 @@ export const Route = createFileRoute("/signup")({
         email: "",
       },
 
-      async onSubmit({ value }) {
+      onSubmit: createClientOnlyFn(async ({ value }) => {
         await clientAuth.signIn.magicLink(value);
-      },
+      }),
     }));
 
     return (

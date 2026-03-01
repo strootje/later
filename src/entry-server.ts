@@ -1,4 +1,4 @@
-import { serverDb } from "@scope/database/server";
+import { serverDb } from "@scope/db/server";
 import handler, { createServerEntry } from "@tanstack/solid-start/server-entry";
 
 await serverDb.migrateToLatest();

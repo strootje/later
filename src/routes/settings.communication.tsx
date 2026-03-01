@@ -1,14 +1,14 @@
+import { Icon } from "#/components/common-icon.tsx";
+import { Page, Section } from "#/components/shell-app-layout.tsx";
+import { Menu } from "#/components/shell-app-menu.tsx";
+import { getMailingLists, getSubscriber, updateSubscriber } from "#/functions/mailing-list.service.ts";
 import { createFileRoute, Link } from "@tanstack/solid-router";
 import { Index } from "solid-js";
-import { Page, Section } from "../comps.ui.shell/layout.tsx";
-import { Menu } from "../comps.ui.shell/menu.tsx";
-import { Icon } from "../comps.ui/icon.tsx";
-import { getMailingLists, getSubscriber, updateSubscriber } from "../data.functions/mailing-list.service.ts";
 
 export const Route = createFileRoute("/settings/communication")({
   loader: async () => ({
-    lists: (await getMailingLists()),
-    subscriber: (await getSubscriber()),
+    lists: await getMailingLists(),
+    subscriber: await getSubscriber(),
   }),
 
   component: () => {

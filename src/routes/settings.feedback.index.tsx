@@ -1,16 +1,16 @@
+import { Icon } from "#/components/common-icon.tsx";
+import { AddFeedbackModal } from "#/components/modal-feedback-add.tsx";
+import { Page, Section } from "#/components/shell-app-layout.tsx";
+import { Menu } from "#/components/shell-app-menu.tsx";
+import { feedbackPostCollection } from "#/functions/feedback-post.collection.ts";
 import { useLiveQuery } from "@tanstack/solid-db";
 import { createFileRoute, Link } from "@tanstack/solid-router";
 import { Index } from "solid-js";
-import { AddFeedbackModal } from "../comps.modals/modal.add-feedback.tsx";
-import { Page, Section } from "../comps.ui.shell/layout.tsx";
-import { Menu } from "../comps.ui.shell/menu.tsx";
-import { Icon } from "../comps.ui/icon.tsx";
-import { feedbackPostCollection } from "../data.collections/feedback-post.collection.ts";
 
 export const Route = createFileRoute("/settings/feedback/")({
   component: () => {
-    const posts = useLiveQuery((p) => {
-      return p.from({ post: feedbackPostCollection })
+    const posts = useLiveQuery((query) => {
+      return query.from({ post: feedbackPostCollection })
         .orderBy(({ post }) => post.votesCount, "desc");
     });
 

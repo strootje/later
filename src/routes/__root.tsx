@@ -1,9 +1,7 @@
+import { AppBar } from "#/components/shell-app-bar.tsx";
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/solid-router";
 import { HydrationScript } from "solid-js/web";
 import { registerSW } from "virtual:pwa-register";
-import { AppBar } from "../comps.ui.shell/app-bar.tsx";
-
-import "@unocss/reset/tailwind.css";
 import "virtual:uno.css";
 
 registerSW({
@@ -36,12 +34,4 @@ export const Route = createRootRoute({
       </body>
     </html>
   ),
-
-  errorComponent: ({ error }) => {
-    return <code>error: {error.message}</code>;
-  },
-
-  notFoundComponent: ({ routeId }) => {
-    return <code>not found.. {routeId}</code>;
-  },
 });
