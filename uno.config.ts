@@ -32,11 +32,6 @@ export default defineConfig({
     }),
 
     presetIcons({
-      extraProperties: {
-        "display": "inline-block",
-        "vertical-align": "middle",
-      },
-
       collections: {
         solar: () => import("@iconify-json/solar/icons.json", { with: { type: "json" } }).then((p) => p.default),
       },
