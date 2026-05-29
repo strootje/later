@@ -2,7 +2,6 @@ import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/solid-r
 import { HydrationScript } from "solid-js/web";
 import { pwaAssetsHead } from "virtual:pwa-assets/head";
 import { pwaInfo } from "virtual:pwa-info";
-import { useRegisterSW } from "virtual:pwa-register/solid";
 import "virtual:uno.css";
 
 export const Route = createRootRoute({
@@ -29,25 +28,19 @@ export const Route = createRootRoute({
     ],
   }),
 
-  component: () => {
-    useRegisterSW({
-      immediate: true,
-    });
+  component: () => (
+    <html lang="en">
+      <head>
+        <HeadContent />
+        <HydrationScript />
+      </head>
 
-    return (
-      <html lang="en">
-        <head>
-          <HeadContent />
-          <HydrationScript />
-        </head>
-
-        <body>
-          <Outlet />
-          <Scripts />
-        </body>
-      </html>
-    );
-  },
+      <body>
+        <Outlet />
+        <Scripts />
+      </body>
+    </html>
+  ),
 
   notFoundComponent: ({ routeId }) => (
     <div>

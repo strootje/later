@@ -1,6 +1,5 @@
 import deno from "@deno/vite-plugin";
 import { tanstackStart } from "@tanstack/solid-start/plugin/vite";
-import { nanoid } from "nanoid";
 import { nitro } from "nitro/vite";
 import sqlocal from "sqlocal/vite";
 import uno from "unocss/vite";
@@ -30,13 +29,14 @@ export default defineConfig(({ mode }) => ({
       },
     }),
     VitePWA({
-      disable: mode === "development",
       strategies: "generateSW",
       registerType: "autoUpdate",
-
-      // srcDir: "src",
       // filename: "entry-sw.ts",
-      outDir: ".output/public",
+      // srcDir: "src",
+
+      integration: {
+        closeBundleOrder: "pre",
+      },
 
       manifest: {
         name: "Notes for Later",
@@ -47,17 +47,17 @@ export default defineConfig(({ mode }) => ({
 
       pwaAssets: {
         disabled: mode === "development",
-        integration: {
-          outDir: ".output/public",
-        },
       },
 
       workbox: {
-        globDirectory: ".output/public",
-        globPatterns: ["**/*.{css,html,ico,js,png,svg,wasm}"],
-        navigateFallback: "_shell.html",
+        globPatterns: ["**/*.{css,ico,js,png,svg,wasm}"],
+        // navigateFallback: "_shell.html",
+        // navigateFallbackDenylist: [
+        //   /^\/_serverFn\//,
+        //   /^\/api\//,
+        // ],
         additionalManifestEntries: [
-          { url: "_shell.html", revision: nanoid() },
+          { url: "_shell.html", revision: new Date().toISOString() },
         ],
       },
     }),

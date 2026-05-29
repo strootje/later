@@ -7,7 +7,12 @@ declare const self: ServiceWorkerGlobalScope;
 precacheAndRoute(self.__WB_MANIFEST);
 
 const handler = createHandlerBoundToURL("/_shell.html");
-const navigationRoute = new NavigationRoute(handler);
+const navigationRoute = new NavigationRoute(handler, {
+  denylist: [
+    /^\/_serverFn\//,
+    /^\/api\//,
+  ],
+});
 registerRoute(navigationRoute);
 
 self.skipWaiting();

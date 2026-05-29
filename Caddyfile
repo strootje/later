@@ -17,7 +17,7 @@
       reverse_proxy later:3000
    }
 
-   handle /serverFns/* {
+   handle /_serverFn/* {
       reverse_proxy later:3000
    }
 
