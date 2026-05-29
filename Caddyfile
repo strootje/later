@@ -1,0 +1,26 @@
+
+{
+   admin off
+   debug
+}
+
+:3030 {
+   root /srv/app
+
+	header {
+		Cross-Origin-Opener-Policy "same-origin"
+		Cross-Origin-Embedder-Policy "require-corp"
+		Cross-Origin-Resource-Policy "same-origin"
+	}
+
+   handle /api/* {
+      reverse_proxy later:3000
+   }
+
+   handle /serverFns/* {
+      reverse_proxy later:3000
+   }
+
+   try_files {path} /_shell.html
+   file_server
+}

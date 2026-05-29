@@ -1,0 +1,10 @@
+{
+  "app": {
+    "title": "later.app"
+  },
+
+  "header": {
+    "previous": "Previous",
+    "next": "Next"
+  }
+}

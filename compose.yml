@@ -1,0 +1,15 @@
+services:
+  caddy:
+    image: docker.io/caddy:2
+    ports:
+      - 3030:3030
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - public:/srv/app:ro
+  app:
+    build:
+      dockerfile: ./Containerfile
+    volumes:
+      - public:/app/public:rw
+volumes:
+  public: {}
