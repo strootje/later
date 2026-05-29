@@ -1,4 +1,0 @@
-{
-  "name": "@strootje/listmonk-api",
-  "exports": "./mod.api.ts"
-}
