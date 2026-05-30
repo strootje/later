@@ -1,13 +1,7 @@
 import { createClientOnlyFn } from "@tanstack/solid-start";
 import { type Compilable, Kysely } from "kysely";
 import { type MigrationProvider, Migrator } from "kysely/migration";
-import {
-  // @ts-types="solid-js"
-  Accessor,
-  createResource, // @ts-types="solid-js"
-  createSignal,
-  onCleanup,
-} from "solid-js";
+import { createResource, onCleanup, type Resource } from "solid-js";
 import { SQLocalKysely } from "sqlocal/kysely";
 
 type Database = {
@@ -36,26 +30,27 @@ export const useClientDb = createClientOnlyFn(() => {
 export const useLiveQuery = createClientOnlyFn(
   <O extends Record<string, unknown>>(
     fn: (props: { db: Kysely<Database> }) => Compilable<O>,
-  ): Accessor<O[] | undefined> => {
+  ): Resource<Array<O>> => {
     const db = useClientDb();
     const { reactiveQuery } = useSqlocal();
-    const [data, setData] = createSignal<O[] | undefined>();
 
-    const [resource] = createResource(
+    const [result, { mutate }] = createResource(
       () => reactiveQuery(fn({ db }).compile()),
-      (query) => {
-        return new Promise<O[] | undefined>((resolve, reject) => {
+      (query) =>
+        new Promise<Array<O>>((resolve, reject) => {
           const { unsubscribe } = query.subscribe(
-            (data) => resolve(setData(data)),
+            (data) => {
+              resolve(data);
+              mutate(data);
+            },
             (err) => reject(err),
           );
 
           onCleanup(unsubscribe);
-        });
-      },
+        }),
     );
 
-    return () => resource.loading ? resource() : data();
+    return result;
   },
 );
 

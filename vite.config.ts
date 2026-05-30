@@ -51,11 +51,11 @@ export default defineConfig(({ mode }) => ({
 
       workbox: {
         globPatterns: ["**/*.{css,ico,js,png,svg,wasm}"],
-        // navigateFallback: "_shell.html",
-        // navigateFallbackDenylist: [
-        //   /^\/_serverFn\//,
-        //   /^\/api\//,
-        // ],
+        navigateFallback: "_shell.html",
+        navigateFallbackDenylist: [
+          /^\/_serverFn\//,
+          /^\/api\//,
+        ],
         additionalManifestEntries: [
           { url: "_shell.html", revision: new Date().toISOString() },
         ],
