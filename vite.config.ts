@@ -1,4 +1,5 @@
 import deno from "@deno/vite-plugin";
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { tanstackStart } from "@tanstack/solid-start/plugin/vite";
 import { nitro } from "nitro/vite";
 import sqlocal from "sqlocal/vite";
@@ -70,6 +71,12 @@ export default defineConfig(({ mode }) => ({
       ssr: true,
     }),
     sqlocal(),
+    sentryVitePlugin({
+      authToken: Deno.env.get("SENTRY_TOKEN"),
+      url: "https://bugs.strooware.nl",
+      org: "does-not-matter",
+      project: "app-later",
+    }),
   ],
   resolve: {
     dedupe: [
