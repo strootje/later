@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
     };
 
     return (
-      <div class="flex min-h-dvh flex-col gap-4 bg-fuchsia-50">
+      <div class="flex min-h-dvh flex-col gap-4 bg-pink-50">
         <AppHeader onSelectedDateChanged={setSelectedDate} />
 
         <Suspense>
