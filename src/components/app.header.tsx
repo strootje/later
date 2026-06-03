@@ -1,6 +1,7 @@
 import { makePersisted } from "@solid-primitives/storage";
 import { createEffect, createSignal, Index, on } from "solid-js";
-import { useI18n, useLocale } from "./hooks/i18n.hook.ts";
+import { Button } from "./common.button.tsx";
+import { useI18n, useLocale } from "./hook.i18n.ts";
 import { WeekDay } from "./week-day.tsx";
 
 type AppHeaderProps = {
@@ -30,35 +31,36 @@ export const AppHeader = (props: AppHeaderProps) => {
   return (
     <header class="flex flex-col gap-1">
       <nav class="flex justify-center">
-        <button class="p-2" type="button" onClick={() => setOffset((val) => val - 1)}>
-          <div class="b-2 b-stone-500 flex items-center gap-1 rounded-xl bg-orange-100 p-2">
+        <Button class="p-1" onClick={() => setOffset((val) => val - 1)}>
+          <div class="b-2 b-stone-200 flex items-center gap-1 rounded-xl bg-white p-2">
             <i class="i-solar:alt-arrow-left-outline v-middle inline-block text-2xl" />
             <span class="sr-only">{t("header.previous")}</span>
           </div>
-        </button>
+        </Button>
 
-        <button class="p-2" type="button" onClick={() => setOffset(0)}>
-          <div class="b-2 b-stone-500 flex items-center gap-1 rounded-xl bg-orange-100 p-2">
+        <Button class="min-w-2/5 p-1" onClick={() => setOffset(0)}>
+          <div class="b-2 b-stone-200 flex items-center justify-center gap-1 rounded-xl bg-white p-2">
             <i class="i-solar:calendar-outline v-middle inline-block text-xl" />
             <span>{rtf().format(offset(), "days")}</span>
           </div>
-        </button>
+        </Button>
 
-        <button class="p-2" type="button" onClick={() => setOffset((val) => val + 1)}>
-          <div class="b-2 b-stone-500 flex items-center gap-1 rounded-xl bg-orange-100 p-2">
+        <Button class="p-1" onClick={() => setOffset((val) => val + 1)}>
+          <div class="b-2 b-stone-200 flex items-center gap-1 rounded-xl bg-white p-2">
             <i class="i-solar:alt-arrow-right-outline v-middle inline-block text-2xl" />
             <span class="sr-only">{t("header.next")}</span>
           </div>
-        </button>
+        </Button>
       </nav>
 
       <nav class="flex justify-around">
         <Index each={weekDays()}>
-          {(offset) => (
+          {(duration) => (
             <WeekDay
-              date={selectedDate().add(offset())}
-              isSelected={offset().days === 0}
-              onClick={() => setOffset((val) => val + offset().days)}
+              date={selectedDate().add(duration())}
+              isSelected={duration().days === 0}
+              isToday={duration().add({ days: offset() }).days === 0}
+              onClick={() => setOffset((val) => val + duration().days)}
             />
           )}
         </Index>

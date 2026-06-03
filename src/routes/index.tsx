@@ -1,9 +1,9 @@
 import * as clientDb from "@scope/db/client";
 import { createFileRoute } from "@tanstack/solid-router";
 import { createSignal, Index, Show, Suspense } from "solid-js";
-import { AppHeader } from "../components/app-header.tsx";
-import { MissedItems } from "../components/missed-items.tsx";
-import { Swiper } from "../components/swiper.tsx";
+import { AppHeader } from "../components/app.header.tsx";
+import { MissedItems } from "../components/app.missed-items.tsx";
+import { Swiper } from "../components/common.swiper.tsx";
 import * as itemFns from "../functions/item.queries.ts";
 
 export const Route = createFileRoute("/")({
@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
     };
 
     return (
-      <div class="flex min-h-dvh flex-col gap-4">
+      <div class="flex min-h-dvh flex-col gap-4 bg-fuchsia-50">
         <AppHeader onSelectedDateChanged={setSelectedDate} />
 
         <Suspense>

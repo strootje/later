@@ -1,5 +1,5 @@
 import { flatten, resolveTemplate, translator } from "@solid-primitives/i18n";
-import en from "../../assets/locales/en.json" with { type: "json" };
+import en from "../assets/locales/en.json" with { type: "json" };
 
 const dict = {
   en: flatten(en),

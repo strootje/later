@@ -1,25 +1,43 @@
+import { cva, VariantProps } from "class-variance-authority";
 import { ComponentProps, splitProps } from "solid-js";
-import { useLocale } from "./hooks/i18n.hook.ts";
+import { tw } from "../utils/unocss.ts";
+import { Button } from "./common.button.tsx";
+import { useLocale } from "./hook.i18n.ts";
 
-type WeekDayProps = ComponentProps<"button"> & {
+const weekDay = cva(tw("b-2 flex flex-col items-center rounded-xl bg-white p-2 font-mono"), {
+  variants: {
+    isSelected: {
+      true: tw("shadow-[2px_2px_0]"),
+    },
+    isToday: {
+      true: tw("b-emerald-200 shadow-emerald-200"),
+    },
+  },
+  compoundVariants: [
+    { isSelected: false, isToday: false, class: tw("b-stone-200") },
+    { isSelected: true, isToday: true, class: tw("b-emerald-500 shadow-emerald-500") },
+  ],
+  defaultVariants: {
+    isSelected: false,
+    isToday: false,
+  },
+});
+
+type WeekDayProps = ComponentProps<"button"> & VariantProps<typeof weekDay> & {
   date: Temporal.PlainDate;
-  isSelected: boolean;
 };
 export const WeekDay = (props: WeekDayProps) => {
-  const [local, attribs] = splitProps(props, ["date", "type"]);
+  const [weekDayProps, attribs] = splitProps(props, ["isSelected", "isToday"]);
 
   const locale = useLocale();
   const dtf = () => new Intl.DateTimeFormat(locale(), { weekday: "short" });
 
   return (
-    <button type={local.type ?? "button"} {...attribs}>
-      <div
-        class="b-2 flex flex-col items-center gap-1 rounded-xl bg-orange-100 p-2 font-mono"
-        classList={{ "b-stone-500": !props.isSelected, "b-lime-500": props.isSelected }}
-      >
+    <Button {...attribs}>
+      <div class={weekDay(weekDayProps)}>
         <span>{dtf().format(props.date)}</span>
         <span>{props.date.day}</span>
       </div>
-    </button>
+    </Button>
   );
 };

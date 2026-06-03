@@ -3,10 +3,7 @@
     "dev": "vite dev",
     "build": "vite build"
   },
-  "allowScripts": [
-    "npm:esbuild@0.27.7",
-    "npm:sharp@0.33.5"
-  ],
+  "allowScripts": ["npm:@sentry/cli@2.58.6", "npm:esbuild@0.27.7", "npm:sharp@0.33.5"],
   "workspace": [
     "pkgs/**"
   ],
