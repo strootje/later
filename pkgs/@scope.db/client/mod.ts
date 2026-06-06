@@ -9,8 +9,11 @@ type Database = {
     id: string;
     dueAt: string;
     title: string;
+    completedAt?: string;
   };
 };
+
+export type Item = Database["item"];
 
 let sqlocal: SQLocalKysely;
 const useSqlocal = createClientOnlyFn(() => {

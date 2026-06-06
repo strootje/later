@@ -1,6 +1,6 @@
 import * as clientDb from "@scope/db/client";
-import { type Accessor, Index, Show } from "solid-js";
-import { Swiper } from "./common.swiper.tsx";
+import { type Accessor, For, Show } from "solid-js";
+import { Item } from "./app.item.tsx";
 import { useI18n } from "./hook.i18n.ts";
 
 type MissedItemsProps = {
@@ -12,6 +12,7 @@ export const MissedItems = (props: MissedItemsProps) => {
   const items = clientDb.useLiveQuery(({ db }) => {
     return db.selectFrom("item")
       .where("dueAt", "<", props.today().toString())
+      .where("completedAt", "is", null)
       .selectAll();
   });
 
@@ -23,15 +24,9 @@ export const MissedItems = (props: MissedItemsProps) => {
         </header>
 
         <div class="transform-3d flex flex-col origin-bc gap-1">
-          <Index each={items()}>
-            {(item) => (
-              <div class="transform-3d">
-                <Swiper class="b-1 b-stone-500 mx-1 flex flex-col gap-1 rounded-xl bg-white p-2">
-                  <span>{item().title}</span>
-                </Swiper>
-              </div>
-            )}
-          </Index>
+          <For each={items()}>
+            {(item) => <Item item={item} selectedDate={props.today()} />}
+          </For>
         </div>
       </div>
     </Show>

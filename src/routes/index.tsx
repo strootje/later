@@ -1,10 +1,10 @@
 import * as clientDb from "@scope/db/client";
 import { createFileRoute } from "@tanstack/solid-router";
-import { createSignal, Index, Show, Suspense } from "solid-js";
+import { createSignal, For, Show, Suspense } from "solid-js";
+import { AddItem } from "../components/app.add-item.tsx";
 import { AppHeader } from "../components/app.header.tsx";
+import { Item } from "../components/app.item.tsx";
 import { MissedItems } from "../components/app.missed-items.tsx";
-import { Swiper } from "../components/common.swiper.tsx";
-import * as itemFns from "../functions/item.queries.ts";
 
 export const Route = createFileRoute("/")({
   component: () => {
@@ -18,34 +18,27 @@ export const Route = createFileRoute("/")({
         .selectAll();
     });
 
-    const addItem = async () => {
-      console.log("pressed the button..");
-      return await itemFns.insert(selectedDate().toString());
-    };
-
     return (
-      <div class="flex min-h-dvh flex-col gap-4 bg-pink-50">
+      <div class="flex min-h-dvh flex-col gap-4 overflow-x-hidden bg-pink-50">
         <AppHeader onSelectedDateChanged={setSelectedDate} />
 
-        <Suspense>
-          <Show when={daysUntilToday() >= 0}>
+        <Show when={daysUntilToday() === 0}>
+          <Suspense>
             <MissedItems today={today} />
-          </Show>
-        </Suspense>
+          </Suspense>
+        </Show>
 
         <div class="flex flex-col gap-1">
           <Suspense>
-            <Index each={items()}>
-              {(item) => (
-                <Swiper class="b-1 b-stone-500 mx-1 flex flex-col gap-1 rounded-xl bg-white p-2">
-                  <span>{item().title}</span>
-                </Swiper>
-              )}
-            </Index>
+            <For each={items()}>
+              {(item) => <Item item={item} selectedDate={selectedDate()} />}
+            </For>
           </Suspense>
         </div>
 
-        <button class="p-4 bg-red" type="button" onClick={addItem}>Add randon item</button>
+        <Show when={daysUntilToday() >= -1}>
+          <AddItem selectedDate={selectedDate} />
+        </Show>
       </div>
     );
   },

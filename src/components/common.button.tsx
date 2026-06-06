@@ -7,7 +7,7 @@ const defaultButtonProps: ButtonProps = {
   type: "button",
 };
 
-type ButtonProps = ComponentProps<"button">;
+export type ButtonProps = ComponentProps<"button">;
 export const Button = (props: ButtonProps) => {
   const merged = mergeProps(defaultButtonProps, props);
   const [local, attribs] = splitProps(merged, ["class", "ref"]);
