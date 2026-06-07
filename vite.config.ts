@@ -43,7 +43,8 @@ export default defineConfig(({ mode }) => ({
         name: "Notes for Later",
         short_name: "later",
         description: "A Notes app that helps you keep track at notes for later",
-        theme_color: "#ff00f0",
+        theme_color: "#f6339a",
+        background_color: "#fdf2f8",
       },
 
       pwaAssets: {
