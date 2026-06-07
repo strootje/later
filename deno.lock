@@ -20,6 +20,7 @@
     "npm:nitro@^3.0.260522-beta": "3.0.260522-beta_vite@7.3.5__lightningcss@1.32.0",
     "npm:solid-js@^1.9.13": "1.9.13",
     "npm:sqlocal@0.18": "0.18.0_kysely@0.29.2_vite@7.3.5__lightningcss@1.32.0",
+    "npm:temporal-polyfill@~0.3.2": "0.3.2",
     "npm:unocss@^66.7.0": "66.7.0_vite@7.3.5__lightningcss@1.32.0",
     "npm:vite-plugin-pwa@^1.3.0": "1.3.0_@vite-pwa+assets-generator@1.0.2_vite@7.3.5__lightningcss@1.32.0_workbox-window@7.4.1",
     "npm:vite-plugin-solid@^2.11.12": "2.11.12_solid-js@1.9.13_vite@7.3.5__lightningcss@1.32.0_lightningcss@1.32.0",
@@ -4037,6 +4038,15 @@
     "temp-dir@2.0.0": {
       "integrity": "sha512-aoBAniQmmwtcKp/7BzsH8Cxzv8OL736p7v1ihGb5e9DJ9kTwGWHrQrVB5+lfVDzfGrdRzXch+ig7LHaY1JTOrg=="
     },
+    "temporal-polyfill@0.3.2": {
+      "integrity": "sha512-TzHthD/heRK947GNiSu3Y5gSPpeUDH34+LESnfsq8bqpFhsB79HFBX8+Z834IVX68P3EUyRPZK5bL/1fh437Eg==",
+      "dependencies": [
+        "temporal-spec"
+      ]
+    },
+    "temporal-spec@0.3.1": {
+      "integrity": "sha512-B4TUhezh9knfSIMwt7RVggApDRJZo73uZdj8AacL2mZ8RP5KtLianh2MXxL06GN9ESYiIsiuoLQhgVfwe55Yhw=="
+    },
     "tempy@0.6.0": {
       "integrity": "sha512-G13vtMYPT/J8A4X2SjdtBTphZlrp1gKv6hZiOjw14RCWg6GbHuQBGtjlx75xLbYV/wEc0D7G5K4rxKP/cXk8Bw==",
       "dependencies": [
@@ -4579,6 +4589,7 @@
         "npm:nitro@^3.0.260522-beta",
         "npm:solid-js@^1.9.13",
         "npm:sqlocal@0.18",
+        "npm:temporal-polyfill@~0.3.2",
         "npm:unocss@^66.7.0",
         "npm:vite-plugin-pwa@^1.3.0",
         "npm:vite-plugin-solid@^2.11.12",
