@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
     });
 
     return (
-      <div class="flex min-h-dvh flex-col gap-4 overflow-x-hidden bg-pink-50">
+      <div class="pt+safe-1 flex min-h-dvh flex-col gap-4 overflow-x-hidden bg-pink-50">
         <AppHeader onSelectedDateChanged={setSelectedDate} />
 
         <Show when={daysUntilToday() === 0}>
