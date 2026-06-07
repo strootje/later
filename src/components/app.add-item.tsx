@@ -5,7 +5,6 @@ type AddItemProps = {
 };
 export const AddItem = (props: AddItemProps) => {
   const addItem = async () => {
-    console.log("pressed the button..");
     return await itemFns.insert(props.selectedDate().toString());
   };
 
