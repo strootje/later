@@ -7,6 +7,7 @@ import { Item } from "../components/app.item.tsx";
 import { MissedItems } from "../components/app.missed-items.tsx";
 
 export const Route = createFileRoute("/")({
+  ssr: false,
   component: () => {
     const [selectedDate, setSelectedDate] = createSignal<Temporal.PlainDate>(Temporal.Now.plainDateISO());
     const daysUntilToday = () => Temporal.Now.plainDateISO().until(selectedDate()).days;
