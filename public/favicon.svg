@@ -133,19 +133,33 @@
        id="path-effect12" />
   </defs>
   <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="bg"
+     sodipodi:insensitive="true">
+    <rect
+       style="display:inline;fill:#fdf2f8;fill-opacity:1;stroke:none;stroke-width:0;stroke-dasharray:none"
+       id="rect7"
+       width="1000"
+       height="1000"
+       x="0"
+       y="0" />
+  </g>
+  <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:inline">
+     style="display:inline"
+     transform="matrix(1.1325595,0,0,1.1327573,-66.279622,-66.490901)">
     <path
        id="path1"
-       style="fill:url(#linearGradient6);fill-rule:nonzero;stroke:#000000;stroke-width:18.89760017;stroke-dasharray:none"
+       style="fill:url(#linearGradient6);fill-rule:nonzero;stroke:#000000;stroke-width:18.8976;stroke-dasharray:none"
        d="m 922.84979,499.82507 c 2.5,425.34985 2.5,420.34985 -422.84986,422.84985 -425.349846,2.5 -425.349846,2.5 -422.849846,-422.84985 2.48531,-422.849939 -2.5,-422.849849 422.849846,-422.849859 425.34986,0 420.36456,-8e-5 422.84986,422.849859 z"
        sodipodi:nodetypes="sssss"
        inkscape:linked-fill="path12" />
     <g
        id="g8"
-       transform="translate(-852.58629,-134.48778)">
+       transform="translate(-852.5863,-134.48778)">
       <path
          id="path6"
          style="fill:#f6339a;fill-opacity:1;stroke:#000000;stroke-width:18.8976;stroke-dasharray:none"
