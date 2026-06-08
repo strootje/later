@@ -49,6 +49,7 @@ export default defineConfig(({ mode }) => ({
 
       pwaAssets: {
         disabled: mode === "development",
+        config: "pwa-assets.config.ts",
       },
 
       workbox: {
