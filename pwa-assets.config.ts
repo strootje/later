@@ -6,7 +6,7 @@ export default defineConfig({
     minimal2023Preset,
     {
       resizeOptions: {
-        background: "#fdf2f8",
+        background: "#265456",
       },
     },
   ),
