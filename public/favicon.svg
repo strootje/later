@@ -37,7 +37,7 @@
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g8">
+     inkscape:current-layer="layer1">
     <sodipodi:guide
        position="589.90075,853.08747"
        orientation="0,-1"
@@ -174,26 +174,13 @@
        gradientUnits="userSpaceOnUse" />
   </defs>
   <g
-     inkscape:groupmode="layer"
-     id="layer2"
-     inkscape:label="bg"
-     sodipodi:insensitive="true">
-    <rect
-       style="display:inline;fill:#fdf2f8;fill-opacity:1;stroke:none;stroke-width:0;stroke-dasharray:none"
-       id="rect7"
-       width="1000"
-       height="1000"
-       x="0"
-       y="0" />
-  </g>
-  <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
      style="display:inline"
      transform="matrix(1.1325595,0,0,1.1327573,-66.279622,-66.490901)">
     <rect
-       style="display:inline;fill:#265456;stroke-width:0;fill-opacity:1"
+       style="display:none;fill:#265456;fill-opacity:1;stroke-width:0"
        id="rect1"
        width="882.95581"
        height="882.80164"
