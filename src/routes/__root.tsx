@@ -18,7 +18,7 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1.0, viewport-fit=cover",
       },
       {
-        name: "apple-mobile-web-app-capable",
+        name: "mobile-web-app-capable",
         content: "yes",
       },
       {
