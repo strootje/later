@@ -21,7 +21,9 @@ export default defineConfig({
       },
     },
     {
-      resizeOptions: {},
+      resizeOptions: {
+        background: "#265456",
+      },
     },
   ),
 });
