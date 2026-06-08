@@ -30,7 +30,7 @@
      inkscape:antialias-rendering="true"
      showguides="true"
      inkscape:zoom="0.35355339"
-     inkscape:cx="356.38182"
+     inkscape:cx="888.12612"
      inkscape:cy="588.31284"
      inkscape:window-width="1728"
      inkscape:window-height="1011"
@@ -61,6 +61,18 @@
   </sodipodi:namedview>
   <defs
      id="defs1">
+    <linearGradient
+       id="linearGradient1"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#265456;stop-opacity:1;"
+         offset="0"
+         id="stop1" />
+      <stop
+         style="stop-color:#2d9797;stop-opacity:1;"
+         offset="1"
+         id="stop2" />
+    </linearGradient>
     <inkscape:path-effect
        effect="powerstroke"
        message=""
@@ -101,28 +113,6 @@
        splitsegments="true"
        halfextreme="true"
        unifysegment="true" />
-    <linearGradient
-       id="linearGradient5"
-       inkscape:collect="always">
-      <stop
-         style="stop-color:#17362e;stop-opacity:1;"
-         offset="0"
-         id="stop5" />
-      <stop
-         style="stop-color:#35717d;stop-opacity:1;"
-         offset="1"
-         id="stop6" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient5"
-       id="linearGradient6"
-       x1="141.75815"
-       y1="119.67108"
-       x2="866.80072"
-       y2="874.69733"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-6.5560616e-5,-0.17493111)" />
     <inkscape:path-effect
        effect="fill_between_many"
        method="bsplinespiro"
@@ -131,6 +121,15 @@
        join="false"
        linkedpaths="#path1,0,1"
        id="path-effect12" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1"
+       id="linearGradient2"
+       x1="58.521976"
+       y1="58.698277"
+       x2="499.99988"
+       y2="941.49994"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <g
      inkscape:groupmode="layer"
@@ -151,15 +150,16 @@
      id="layer1"
      style="display:inline"
      transform="matrix(1.1325595,0,0,1.1327573,-66.279622,-66.490901)">
-    <path
-       id="path1"
-       style="fill:url(#linearGradient6);fill-rule:nonzero;stroke:#000000;stroke-width:18.8976;stroke-dasharray:none"
-       d="m 922.84979,499.82507 c 2.5,425.34985 2.5,420.34985 -422.84986,422.84985 -425.349846,2.5 -425.349846,2.5 -422.849846,-422.84985 2.48531,-422.849939 -2.5,-422.849849 422.849846,-422.849859 425.34986,0 420.36456,-8e-5 422.84986,422.849859 z"
-       sodipodi:nodetypes="sssss"
-       inkscape:linked-fill="path12" />
+    <rect
+       style="display:inline;fill:url(#linearGradient2);stroke-width:0;fill-opacity:1"
+       id="rect1"
+       width="882.95581"
+       height="882.80164"
+       x="58.521976"
+       y="58.698277" />
     <g
        id="g8"
-       transform="translate(-852.5863,-134.48778)">
+       transform="matrix(1.1865263,0,0,1.1865263,-1104.8793,-252.73734)">
       <path
          id="path6"
          style="fill:#f6339a;fill-opacity:1;stroke:#000000;stroke-width:18.8976;stroke-dasharray:none"
