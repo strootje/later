@@ -5,6 +5,7 @@ import { AddItem } from "../components/app.add-item.tsx";
 import { AppHeader } from "../components/app.header.tsx";
 import { Item } from "../components/app.item.tsx";
 import { MissedItems } from "../components/app.missed-items.tsx";
+import { UpdatePrompt } from "../components/app.update-prompt.tsx";
 
 export const Route = createFileRoute("/")({
   ssr: false,
@@ -40,6 +41,8 @@ export const Route = createFileRoute("/")({
         <Show when={daysUntilToday() >= -1}>
           <AddItem selectedDate={selectedDate} />
         </Show>
+
+        <UpdatePrompt />
       </div>
     );
   },

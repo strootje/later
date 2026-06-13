@@ -31,20 +31,25 @@ export default defineConfig(({ mode }) => ({
     }),
     VitePWA({
       strategies: "generateSW",
-      registerType: "autoUpdate",
       // filename: "entry-sw.ts",
       // srcDir: "src",
 
-      integration: {
-        closeBundleOrder: "pre",
-      },
+      // integration: {
+      //   closeBundleOrder: "pre",
+      // },
 
       manifest: {
         name: "Notes for Later",
-        short_name: "later",
+        short_name: "Later",
         description: "A Notes app that helps you keep track at notes for later",
         theme_color: "#fdf2f8",
         background_color: "#265456",
+      },
+
+      devOptions: {
+        enabled: true,
+        type: "module",
+        suppressWarnings: true,
       },
 
       pwaAssets: {
@@ -54,12 +59,12 @@ export default defineConfig(({ mode }) => ({
 
       workbox: {
         globPatterns: ["**/*.{css,ico,js,png,svg,wasm}"],
-        navigateFallback: "_shell.html",
-        navigateFallbackDenylist: [
+        navigateFallback: mode === "development" ? undefined : "_shell.html",
+        navigateFallbackDenylist: mode === "development" ? undefined : [
           /^\/_serverFn\//,
           /^\/api\//,
         ],
-        additionalManifestEntries: [
+        additionalManifestEntries: mode === "development" ? [] : [
           { url: "_shell.html", revision: new Date().toISOString() },
         ],
       },

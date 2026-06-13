@@ -1,4 +1,3 @@
-import { clientsClaim } from "workbox-core";
 import { cleanupOutdatedCaches, createHandlerBoundToURL, precacheAndRoute } from "workbox-precaching";
 import { NavigationRoute, registerRoute } from "workbox-routing";
 
@@ -15,5 +14,11 @@ const navigationRoute = new NavigationRoute(handler, {
 });
 registerRoute(navigationRoute);
 
-self.skipWaiting();
-clientsClaim();
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+// self.skipWaiting();
+// clientsClaim();
